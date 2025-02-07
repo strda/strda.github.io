@@ -1,0 +1,61 @@
+@media screen and (min-width: 500px) {
+}
+.otherpages
+{
+    padding-left: 5%;
+    padding-right: 5%;
+    padding-top: 1%;
+}
+
+.section-divided
+{
+    background-color: red;
+    display: flex;
+}
+
+.section-divided__header
+{
+    margin: 1vh 0vw;
+}
+
+.section-divided img
+{
+    display: block;
+    margin: auto;
+    max-width: 100%;
+    height: auto;
+}
+
+
+.section-container{
+    display: flex;
+    justify-content: center;
+    background-color: green;
+}
+
+.section-h-left
+{
+    display: inline-flex;
+    max-width: 577.8px;
+    background-color: yellow;
+    vertical-align: top;
+    margin-right: 1.25%;
+}
+
+.section-h-right
+{
+    margin-left: 1.25%;
+    display: inline-block;
+    max-width: 259.4px;
+    background-color: blue;
+    vertical-align: top;
+}
+
+.section-divided-equally
+{
+    display: inline-flex;
+    max-width: 400px;
+    background-color: yellow;
+    vertical-align: top;
+    margin-right: 2.5%;
+}

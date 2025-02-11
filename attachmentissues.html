@@ -13,36 +13,84 @@
 
 <body>
     <nav class="navbar">
-        <div class="logo">
-            <span class="logo-text"><i class="fa fa book" style="margin-right: 0.1em">Jason</i><span
-                    style="color: #f09d51; font-size: 1.1em">Shull</span></span>
-        </div>
-
-        <div class="menubar">
-            <ul class="list">
-                <li class="list-items"><a href="index.html">Home</a></li>
-                <li class="list-items"><a href="">About</a></li>
-                <li class="list-items"><a href="">Contact</a></li>
-                <div class="expandable">
-                    <div class="expandable__title-bar">
-                        <span class="expandable__title">Portfolio</span>
-                        <ion-icon class="expandable__icon" name="chevron-back"></ion-icon>
-                    </div>
-                    <div class="expandable__content-wrapper">
-                        <div class="expandable__content">
-                            <li class="list-items"><a href="sss.html">Soul Sync City</a></li>
-                            <li class="list-items"><a href="attachmentissues.html">Attachment Issues</a></li>
-                            <li class="list-items"><a href="partycrashers.html">Party Crashers</a></li>
-                            <li class="list-items"><a href="otherprojects.html">Other Projects</a></li>
+        <div class="expandable">
+            <div class="expandable__title-bar">
+            </div>
+            <div class="expandable__content-wrapper">
+                <ul class="expandable__content">
+                    <li class="list-items"><a href="index.html">Home</a></li>
+                    <li class="list-items"><a href="">About</a></li>
+                    <li class="list-items"><a href="">Contact</a></li>
+                    <div class="internal-expandable">
+                        <div class="internal-expandable__title-bar">
+                            <span class="internal-expandable__title">Portfolio</span>
+                            <ion-icon class="internal-expandable__icon" name="chevron-back"></ion-icon>
+                        </div>
+                        <div class="internal-expandable__content-wrapper">
+                            <div class="internal-expandable__content">
+                                <li class="list-items"><a href="sss.html">Soul Sync City</a></li>
+                                <li class="list-items"><a href="attachmentissues.html">Attachment Issues</a></li>
+                                <li class="list-items"><a href="partycrashers.html">Party Crashers</a></li>
+                                <li class="list-items"><a href="otherprojects.html">Other Projects</a></li>
+                            </div>
                         </div>
                     </div>
-                </div>
-            </ul>
+                </ul>
+            </div>
         </div>
     </nav>
-    <object width="500" height="400" data="/2022-11-28 20-12-17_Trim.mp4" type="video/mp4">
-    </object>
 
+    <section class="otherpages">
+        <div class="section-divided__header" style="background-color: purple;">
+            <h1>Attachment Issues</h1>
+            <div class="section-container">
+                <div class="section-h-left">
+                    <div class="video-container">
+                        <video controls>
+                            <source src="/2022-11-28 20-12-17_Trim.mp4" type="video/mp4">
+                            Your browser does not support the video tag.
+                        </video>
+                    </div>
+                </div>
+                <div class="section-h-right">
+                    <ul class="section-divided-textlist">
+                        <li>
+                            <h2> Engine </h2>
+                            <p>Unity</p>
+                        </li>
+                        <li>
+                            <h2> Language </h2>
+                            <p>C#</p>
+                        </li>
+                        <li>
+                            <h2> Duration </h2>
+                            <p>Unity</p>
+                        </li>
+                        <li>
+                            <h2> Team Size </h2>
+                            <p>5</p>
+                        </li>
+                        <li>
+                            <h2> Role </h2>
+                            <p>Producer/Proggrammer</p>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="section-divided-centered">
+            <div>
+                <h2>Responsibilities:</h2>
+                    <h3>Producer</h3>
+                    <li>trying to keep team on task</li>
+                    <li>Managing schedules of avaliblity to work</li>
+                    <h3>Programmer</h3>
+                    <li>helped others as needed</li>
+                    <h3>Art</h3>
+                    <li>also helped optimize some of the UV's of the meshes</li>
+            </div>
+        </div>
+    </section>
 
     <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
     <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>

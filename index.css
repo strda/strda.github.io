@@ -6,30 +6,7 @@
     font-size: 20;
     color:white;
 }
-/* #region name */
-.main
-{
-    --padding: 12.5vw;
-    margin: 10px;
-    padding: 10px;
-    padding-left: var(--padding);
-    padding-right: var(--padding);
-    display: inline-block;
-}
 
-.main h1
-{
-    color:rgb(143, 0, 143);
-    padding-left: var(--padding);
-    padding-right:  var(--padding);
-    text-decoration: underline;
-}
-
-.main p
-{
-    padding-left:  var(--padding);
-    padding-right:  var(--padding);
-}
 
 html{
     scroll-behavior: smooth;
@@ -107,30 +84,6 @@ ul
 .special_icons
 {
     display: flex;
-}
-
-.slist{
-    display: flex;
-    padding: 5px 5px;
-    justify-content: space-between;
-    padding-left:  var(--padding);
-    padding-right:  var(--padding);
-
-
-    margin-left: auto;
-    margin-right: auto;
-}
-
-.slist-items a{
-    color: white;
-    font-family: sans-serif;
-    transition: 0.4s;
-    border: 2px solid purple; /* Border width, style, and color */ 
-    display: flex;
-}
-
-.slist-items a:hover{
-    color:green
 }
 
 .centered
@@ -239,30 +192,6 @@ ul
         display: flex;
     }
     
-    .slist{
-        display: flex;
-        padding: 5px 5px;
-        justify-content: space-between;
-        padding-left: 20vw;
-        padding-right: 20vw;
-    
-        border: 2px solid white; /* Border width, style, and color */ 
-        margin-left: auto;
-        margin-right: auto;
-    }
-    
-    .slist-items a{
-        color: white;
-        font-family: sans-serif;
-        transition: 0.4s;
-        border: 2px solid black; /* Border width, style, and color */ 
-        display: flex;
-    }
-    
-    .slist-items a:hover{
-        color:green
-    }
-    
     .centered
     {
         justify-content: space-between;
@@ -276,3 +205,111 @@ ul
     }
 
 }
+
+/* #region name */
+.main
+{
+    --padding: 12.5vw;
+    margin: 10px;
+    padding: 10px;
+    padding-left: var(--padding);
+    padding-right: var(--padding);
+    display: inline-block;
+}
+
+.main h1
+{
+    color:rgb(143, 0, 143);
+    text-decoration: underline;
+}
+
+.grid-element
+{
+    --gridwidth: 300px;
+    display: inline-block;
+    border: 2px solid white;
+    justify-content: space-between;
+    height: 100%;
+}
+
+.grid-element p
+{
+    width: auto;
+    height: auto;
+    max-width: var(--gridwidth);
+    max-height: var(--gridwidth);
+    position: relative;
+    overflow: hidden;
+    display: flex;
+    border: 2px solid gold;
+}
+
+.grid-element h4
+{
+    width: 100%;
+    height: auto;
+    max-width: var(--gridwidth);
+    position: relative;
+    overflow: hidden;
+    display: flex;
+    height: auto;
+}
+
+.grid-element .p h5
+{
+    width: 100%;
+    height: auto;
+    max-width: var(--gridwidth);
+    position: relative;
+    overflow: hidden;
+    display: flex;
+    height: auto;
+}
+
+/* Image Container */
+.image-container {
+    width: 100%;
+    height: 100%;
+    max-width: var(--gridwidth);
+    max-height: var(--gridwidth);
+    position: relative;
+    overflow: hidden;
+    display:flex;
+    justify-content: center;
+    align-items: center;
+    object-fit: cover;
+    flex-wrap: wrap; /* Allows images to wrap on smaller screens */
+    border: 3px solid red;
+}
+
+.image-container img {
+    width:  var(--gridwidth);
+    height: auto;
+    max-width: var(--gridwidth); /* Prevents them from getting too large */
+    object-fit: cover;
+    border: 5px solid blue;
+}
+
+.slist{
+    --gridwidth: 300px;
+    display: flex;
+    padding: 5px 5px;
+    justify-content: center;
+    flex-wrap: wrap;
+
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.slist-items a{
+    height: 100%;
+    color: white;
+    font-family: sans-serif;
+    transition: 0.4s;
+    display: block;
+}
+
+.slist-items a:hover{
+    color:green
+}
+

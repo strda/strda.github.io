@@ -187,7 +187,7 @@ h1{
     max-height: var(--gridwidth);
     position: relative;
     overflow: hidden;
-    display:f;
+    display:flex;
     justify-content: center;
     align-items: center;
     object-fit: cover;
@@ -196,10 +196,34 @@ h1{
 }
 
 .image-container img {
-    width: 100%;
+    width:  var(--gridwidth);
     height: auto;
     max-width: var(--gridwidth); /* Prevents them from getting too large */
     object-fit: cover;
     border: 5px solid blue;
 }
 
+.slist{
+    --gridwidth: 300px;
+    display: flex;
+    padding: 5px 5px;
+    justify-content: space-between;
+    padding-left:  var(--padding);
+    padding-right:  var(--padding);
+
+
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.slist-items a{
+    height: 100%;
+    color: white;
+    font-family: sans-serif;
+    transition: 0.4s;
+    display: block;
+}
+
+.slist-items a:hover{
+    color:green
+}

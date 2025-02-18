@@ -28,7 +28,9 @@
     margin-right: auto;
     display: inline-block;
     /*border: 2px solid white;*/
-    padding: 10px;
+    padding-left: 10px;
+    padding-right: 10px;
+    padding-bottom: 10px;
 }
 
 
@@ -76,6 +78,14 @@ h3{
     flex-wrap: wrap;
 }
 
+.section-container-spaced {
+    display: flex;
+    justify-content: space-between;
+    /*background-color: green;*/
+    padding: 10px;
+    flex-wrap: wrap;
+}
+
 /* Header */
 .section-divided__header {
     margin: 1vh 0;
@@ -83,7 +93,9 @@ h3{
 
 /* Flex-based Section Styling */
 .section-h-left,
+.section-left,
 .section-h-right,
+.section-right,
 .section-divided-equally,
 .section-divided-equally-centered,
 .section-divided-centered {
@@ -103,11 +115,34 @@ h3{
     /*background-color: blue;*/
 }
 
+/* Left and Right Sections */
+.section-left {
+    max-width: 577.8px;
+    margin-right: 1.25%;
+}
+
+.section-right {
+    max-width: 577.8px;
+    margin-left: 1.25%;
+    /*background-color: blue;*/
+}
+
+
 /* Equally Divided Sections */
 .section-divided-equally,
 .section-divided-equally-centered {
     max-width: 400px;
     margin-right: 2.5%;
+    display: block;
+}
+
+.section-divided-equally h3
+{
+    font-size: 1.5em;
+}
+.section-divided-equally p
+{
+    font-size: 1em;
 }
 
 /* Centered Content */

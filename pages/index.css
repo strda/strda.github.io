@@ -248,10 +248,11 @@ ul
 
 /* Image Container */
 .image-container {
+    --imgwidth: 320px;
     width: 100%;
     height: 100%;
-    max-width: var(--gridwidth);
-    max-height: var(--gridwidth);
+    max-width: var(--imgwidth);
+    max-height: var(--imgwidth);
     position: relative;
     overflow: hidden;
     display:flex;
@@ -263,9 +264,9 @@ ul
 }
 
 .image-container img {
-    width:  var(--gridwidth);
+    width:  var(--imgwidth);
     height: auto;
-    max-width: var(--gridwidth); /* Prevents them from getting too large */
+    max-width: var(--imgwidth); /* Prevents them from getting too large */
     object-fit: cover;
     /*border: 5px solid blue;*/
 }
@@ -294,7 +295,6 @@ ul
 }
 
 .slist{
-    --gridwidth: 300px;
     display: flex;
     padding: 5px 5px;
     justify-content: center;

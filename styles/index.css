@@ -62,19 +62,6 @@ ul
 }
 
 
-@media screen and (min-width: 825px) {
-.banner1{
-    height: 500px;
-    display: block;
-    max-width: 1520px;
-    background: url("images/UserProfileBackgroundV1.png") center center/cover;
-    top: 0;
-    left: 0;
-    z-index: -1;
-    min-width: none;
-}
-}
-
 .mainmenu
 {
     padding-left: 2em;
@@ -103,7 +90,7 @@ ul
         margin: 10px;
         padding: 10px;
     }
-    
+
     html{
         scroll-behavior: smooth;
         background-color: black;
@@ -156,20 +143,6 @@ ul
         }
     }
     
-    
-    @media screen and (min-width: 825px) {
-    .banner1{
-        height: 500px;
-        display: block;
-        max-width: 1520px;
-        background: url("images/UserProfileBackgroundV1.png") center center/cover;
-        top: 0;
-        left: 0;
-        z-index: -1;
-        min-width: none;
-    }
-    }
-    
     .mainmenu
     {
         padding-left: 2em;
@@ -181,6 +154,28 @@ ul
         display: flex;
     }
 
+}
+
+.banner1{
+    height: 30vw;
+    display: block;
+    max-width: auto;
+    background: url("images/UserProfileBackgroundV1.png") center center/cover;
+    top: 0;
+    left: 0;
+    z-index: -1;
+    min-width: none;
+}
+
+.banner2{
+    height: 30vw;
+    display: block;
+    max-width: auto;
+    background: url("images/SoulSync\ City\ Website\ Banner.jpg") center center/cover;
+    top: 0;
+    left: 0;
+    z-index: -1;
+    min-width: none;
 }
 
 /* #region name */

@@ -1,1 +1,1 @@
-# strda.github.io
+# strda.github

@@ -1,4 +1,4 @@
-# Sample workflow for building and deploying a Jekyll site to GitHub Pages
+ # Sample workflow for building and deploying a Jekyll site to GitHub Pages
 name: Deploy Jekyll with GitHub Pages dependencies preinstalled
 
 on:
@@ -23,6 +23,7 @@ concurrency:
 
 jobs:
   # Build job
+  actions: read
   build:
     runs-on: ubuntu-latest
     steps:

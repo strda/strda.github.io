@@ -18,7 +18,7 @@
             </div>
             <div class="expandable__content-wrapper">
                 <ul class="expandable__content">
-                    <li class="list-items"><a href="/index.html">Home</a></li>
+                    <li class="list-items"><a href="../index.html">Home</a></li>
                     <li class="list-items"><a href="">About</a></li>
                     <li class="list-items"><a href="">Contact</a></li>
                     <div class="internal-expandable">
@@ -482,10 +482,10 @@
                     }
                 </script>
                 <h4>
-                    LOREM IPSUM
+                    Robot
                 </h4>
                 <p>
-                    LOREM IPSUM
+                    3D Model of a Robot designed to clean???
                 </p>
             </div>
             <div class="grid-element" alt="Turrets">
@@ -503,10 +503,10 @@
                     setInterval(() => toggleModel.setAttribute('src', `../styles/models/Turrets/${models[j++ % 15]}`), 1000);
                 </script>
                 <h4>
-                    LOREM IPSUM
+                    Turret Upgrade Paths
                 </h4>
                 <p>
-                    LOREM IPSUM
+                    Potential upgrade paths of a turret for a tower defense game
                 </p>
             </div>
             <div class="grid-element" alt="Railguns">
@@ -521,10 +521,10 @@
                     setInterval(() => to.setAttribute('src', `../styles/models/Turrets/${mo[k++ % 3]}`), 2000);
                 </script>
                 <h4>
-                    LOREM IPSUM
+                    Railguns
                 </h4>
                 <p>
-                    LOREM IPSUM
+                    Railguns Designed to charge up and then shoot
                 </p>
             </div>
             <div class="grid-element" alt="Nexus Animation">
@@ -533,10 +533,10 @@
                     alt="An animated 3D model of a robot" auto-rotate rotation-per-second="20deg" disable-tap>
                 </model-viewer>
                 <h4>
-                    LOREM IPSUM
+                    Nexus
                 </h4>
                 <p>
-                    LOREM IPSUM
+                    Was a 3D model I made for a Tower defense game
                 </p>
             </div>
             <div class="grid-element" alt="PlayerModel">
@@ -545,10 +545,10 @@
                     auto-rotate rotation-per-second="20deg" disable-tap>
                 </model-viewer>
                 <h4>
-                    LOREM IPSUM
+                    Low Poly Character?
                 </h4>
                 <p>
-                    LOREM IPSUM
+                    Was just having fun making a model
                 </p>
             </div>
             <div class="grid-element" alt="Camel">
@@ -557,72 +557,7 @@
                     camera-orbit="180deg 75deg" auto-rotate rotation-per-second="20deg" disable-tap>
                 </model-viewer>
                 <h4>
-                    LOREM IPSUM
-                </h4>
-                <p>
-                    LOREM IPSUM
-                </p>
-            </div>
-            <div class="grid-element" alt="ToasterAnim">
-                <model-viewer id="anim" camera-controls touch-action="pan-y" ar ar-modes="webxr scene-viewer"
-                    shadow-intensity="1" poster="../styles/images/download.png" src="../styles/models/ToasterGun.glb"
-                    alt="An animated 3D model of a robot" auto-rotate rotation-per-second="20deg" disable-tap>
-                </model-viewer>
-                <div class="model-selection-box glass">
-                    <label for="blend-model-selection">Select model:</label>
-                    <select id="blend-model-selection">
-                        <option selected value="Camel.glb">Camel</option>
-                        <option selected value="ToasterGun.glb">Robot</option>
-                    </select>
-                </div>
-                <div class="controls glass" id="control-panel">
-
-                </div>
-                <script>
-                    (() => {
-                        const modelViewer = document.querySelector('#anim');
-                        const controlsPanel = document.querySelector('#control-panel');
-                        const blend_model_selection = document.querySelector('.model-selection-box #blend-model-selection');
-
-
-
-                        blend_model_selection.addEventListener("change", event => {
-                            controlsPanel.innerHTML = "";
-                            console.log("changeModel");
-                            changeModel(event.target.value);
-                        });
-
-                        modelViewer.addEventListener("load", loadModelAnimations);
-
-                        function loadModelAnimations() {
-                            if (blend_model_selection.value === "soldier.glb") {
-                                modelViewer.setAttribute("camera-orbit", "180deg");
-                            } else {
-                                modelViewer.removeAttribute("camera-orbit");
-                            }
-                            console.log(controlsPanel);
-                            modelViewer.availableAnimations.forEach(animationName => {
-                                if (animationName !== "TPose")
-                                    controlsPanel.innerHTML += `
-                        <label for="${animationName}">${animationName}</label>
-                        <input id="${animationName}" type="range" min="0" max="1" step="0.01" value="0">
-                      `;
-                                modelViewer.play(animationName);
-                            });
-                        }
-
-
-
-                        function changeModel(modelName) {
-                            modelViewer.setAttribute("src", `../styles/models/${modelName}`);
-                        }
-
-                        changeModel(blend_model_selection.value);
-
-                    })();
-                </script>
-                <h4>
-                    LOREM IPSUM
+                    Camel
                 </h4>
                 <p>
                     LOREM IPSUM
@@ -693,10 +628,41 @@
                     })();
                 </script>
                 <h4>
-                    LOREM IPSUM
+                    Attachment Issues Player Character
                 </h4>
                 <p>
-                    LOREM IPSUM
+                    Unused Animations that I made for the game ATTACHMENT ISSUES
+                </p>
+            </div>
+            <div class="grid-element" alt="ToasterAnim">
+                <model-viewer id="anim" camera-controls touch-action="pan-y" ar ar-modes="webxr scene-viewer"
+                    shadow-intensity="1" poster="../styles/images/download.png" src="../styles/models/ToasterGun.glb"
+                    alt="An animated 3D model of a robot" auto-rotate rotation-per-second="20deg" disable-tap>
+                </model-viewer>
+                <div class="controls glass" id="control-panel">
+
+                </div>
+                <script>
+                    (() => {
+                        const modelViewer = document.querySelector('#anim');
+
+                        modelViewer.addEventListener("load", loadModelAnimations);
+
+                        function loadModelAnimations() {
+                                modelViewer.removeAttribute("camera-orbit");
+                            modelViewer.availableAnimations.forEach(animationName => {
+                                if (animationName !== "TPose")
+                                modelViewer.play(animationName);
+                            });
+                        }
+
+                    })();
+                </script>
+                <h4>
+                    Toaster
+                </h4>
+                <p>
+                    Concept for a potential gun which is litteraly just a toaster that shoots out toast
                 </p>
             </div>
             <div class="grid-element" alt="Boat Gun">
@@ -705,10 +671,10 @@
                     auto-rotate rotation-per-second="20deg" disable-tap>
                 </model-viewer>
                 <h4>
-                    LOREM IPSUM
+                    Boat Gun
                 </h4>
                 <p>
-                    LOREM IPSUM
+                    Concept Idea for a weapon I decided to 3D model
                 </p>
             </div>
     </div>
@@ -720,10 +686,10 @@
                 <img src="../styles/art/Bread.gif">
             </div>
             <h4>
-                LOREM IPSUM
+                Bread Skate
             </h4>
             <p>
-                LOREM IPSUM
+                🥖+🛹
             </p>
         </div>
         <div class="grid-element" alt="Kirby">
@@ -731,10 +697,10 @@
                 <img src="../styles/art/Kirby.png">
             </div>
             <h4>
-                LOREM IPSUM
+                Sleeping Kirby
             </h4>
             <p>
-                LOREM IPSUM
+                Made for Wakey Wakey's Costume Contest to potentially be put into that game 
             </p>
         </div>
         <div class="grid-element" alt="Help">
@@ -753,14 +719,14 @@
                 <img src="../styles/art/Snek.png">
             </div>
             <h4>
-                LOREM IPSUM
+                Pet Snake
             </h4>
             <p>
                 LOREM IPSUM
             </p>
         </div>
         <div class="grid-element" alt="Monster">
-            <div class="image-container">
+            <div class="big_image-container">
                 <img src="../styles/art/Monster.png" id="monsters">
             </div>
             <script>
@@ -770,36 +736,41 @@
                 setInterval(() => mons.setAttribute('src', `../styles/art/${pngs[jf++ % 2]}`), 2000);
             </script>
             <h4>
-                LOREM IPSUM
-            </h4>
-            <p>
-                LOREM IPSUM
-            </p>
-        </div>
-        <div class="grid-element" alt="Web Design Project">
-            <div class="image-container">
-                <img src="../styles/art/Shull_Jason_WebDesignProject-1.png">
-            </div>
-            <div class="image-container">
-                <img src="../styles/art/Shull_Jason_WebDesignProject-2.png">
-            </div>
-            <h4>
-                LOREM IPSUM
+                Lizard-like Creature
             </h4>
             <p>
                 LOREM IPSUM
             </p>
         </div>
         <div class="grid-element" alt="Poster Design">
-            <div class="image-container">
+            <div class="big_image-container">
                 <img src="../styles/art/TCGClubPosterV2.png">
             </div>
             <h4>
-                LOREM IPSUM
+                College TCG Club Poster
             </h4>
             <p>
-                LOREM IPSUM
+                Poster I designed for a club at my school that was not used
             </p>
+        </div>
+    </div>
+    <div class="section-divided-centered" alt="Web Design Project">
+        <div class="section-divided-stack">
+            <div class="banner_image-container">
+                <img src="../styles/art/Shull_Jason_WebDesignProject-1.png">
+            </div>
+            <div class="banner_image-container">
+                <img src="../styles/art/Shull_Jason_WebDesignProject-2.png">
+            </div>
+            <div>
+                <h4>
+                    Children Website Idea
+                </h4>
+                <p>
+                    Website Idea I made for a class which teaches kids about math with dinosaurs 
+                </p>
+            </div>
+
         </div>
     </div>
 

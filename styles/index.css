@@ -202,6 +202,7 @@ ul
     /*border: 2px solid white;*/
     justify-content: space-between;
     height: 100%;
+    padding: 5px;
 }
 
 .grid-element p
@@ -263,6 +264,53 @@ ul
     height: auto;
     min-width: 180px;
     max-width: var(--imgwidth); /* Prevents them from getting too large */
+    object-fit: cover;
+    /*border: 5px solid blue;*/
+}
+
+/* Image Container */
+.big_image-container {
+    width: 100%;
+    height: 100%;
+    position: relative;
+    overflow: hidden;
+    display:flex;
+    justify-content: center;
+    align-items: center;
+    object-fit: cover;
+    flex-wrap: wrap; /* Allows images to wrap on smaller screens */
+    /*border: 3px solid red;*/
+}
+
+.big_image-container img {
+    --bimgwidth: 400px;
+    width:  auto;
+    height: auto;
+    min-width: 180px;
+    max-width: var(--bimgwidth); 
+    max-height: var(--bimgwidth);/* Prevents them from getting too large */
+    object-fit: cover;
+    /*border: 5px solid blue;*/
+}
+
+/* Image Container */
+.banner_image-container {
+    width: 100%;
+    height: 100%;
+    position: relative;
+    overflow: hidden;
+    display:flex;
+    justify-content: center;
+    align-items: center;
+    object-fit: cover;
+    flex-wrap: wrap; /* Allows images to wrap on smaller screens */
+    /*border: 3px solid red;*/
+}
+
+.banner_image-container img {
+    width:  auto;
+    height: auto;
+    min-width: 180px;
     object-fit: cover;
     /*border: 5px solid blue;*/
 }

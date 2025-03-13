@@ -2,8 +2,6 @@
 const el = document.getElementById('body');
 console.log(document.body);
 
-
-
 function resizeEvent()
 {
         // Get screen resolution
@@ -45,7 +43,25 @@ document.body.addEventListener("click", (ev) =>
 
     if(isExpandableItem)
     {   
-        console.log("button press")
+        if(location.href.split(location.host)[1] != "/index.html")
+        {
+        window.location.href = "/index.html";
+        }
+        
+        var txt = ev.target.closest(".list-items").textContent;
+        if(txt == "About")
+        {
+            document.getElementById('about').scrollIntoView({
+                behavior: "smooth",
+                block: "start",
+                inline: "nearest"
+              });
+        }
+        else if(txt == "Contact")
+        {
+            console.log("text is About");
+        }
+        
     }
     else if(isExpandableTitle){
         expandable.classList.toggle("expandable--open");
@@ -55,3 +71,4 @@ document.body.addEventListener("click", (ev) =>
         internalExpandable.classList.toggle("internal-expandable--open");
     }
 });
+

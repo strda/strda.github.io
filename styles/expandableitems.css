@@ -123,8 +123,7 @@
     display: flex;
     padding: 5px 5px;
     justify-content: space-between;
-    padding-right: 10%;
-    
+    padding-right: 10%;    
 }
 .list-items a{
     color: white;
@@ -175,32 +174,37 @@
     
     .expandable__content
     {
+        
         display: flex;
         margin-left: 5%;
         margin-right: 5%;
         padding: 2.5%;
+        height: 100px;
         justify-content: space-between;
+        
     }
     
     
     .expandable__content-wrapper
     {
-        
+        background-color: rgb(22, 0, 21);
     }
     
     .internal-expandable {
         --xy-padding: 14px;
         --border-radius: 6px
-    
+
         max-width: 500px;
-        margin: .16em 0;
+
+        padding: 0 10px;
         font-size: 0.9em;
         font-family: 'Inter',sans-serif;
-        
+
     }
     
     .internal-expandable--open .internal-expandable__content-wrapper{
         grid-template-rows: 1fr;
+        align-items: center;
     }
     
     .internal-expandable--open .expandable__icon {
@@ -215,6 +219,9 @@
         border-radius: var(--border-radius) var(--border-radius) 0 0;
         color: white;
         cursor: pointer; 
+
+
+        padding: 10px 10px;
     }
     .internal-expandable__title-bar:hover
     {
@@ -224,7 +231,7 @@
     .internal-expandable__content
     {
         padding: 0 0;
-        line-height: 1.4;
+        line-height: 2.5;
         font-size: 0.9em;
         color: black;
         border-radius: 0 0  var(--border-radius) var(--border-radius);
@@ -239,24 +246,46 @@
         display: grid;
         
         grid-template-rows: 0fr;
-        transition: grid-template-rows 0.3s ease-out;
+        transition: grid-template-rows 0.3s ease-in;
     }
 
     
-.list{
+    .list{
         display: block;
         margin-left: auto;
         margin-right: auto;
-}
-.list-items a{
+    }
+
+    .list-items a{
     color: white;
     font-family: sans-serif;
     font-size: 0.9em;
     transition: 0.4s;
-    display: inline;
-    padding: 0%;
-}
-.list-items a:hover{
+    display: flex;
+    align-items: center;
+    padding: 10px 10px;
+    }
+    .list-items a:hover{
     color:green
-}
+    }
+
+    .portfolio_list{
+        display: block;
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+    .portfolio_list-items a{
+    color: white;
+    font-family: sans-serif;
+    font-size: 0.9em;
+    transition: 0.4s;
+    display: flex;
+    align-items: center;
+    padding: 10px 10px;
+    background-color: rgb(23, 23, 23);
+    }
+    .portfolio_list-items a:hover{
+    color:green
+    }
 }

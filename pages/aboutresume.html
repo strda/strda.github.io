@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>h</title>
+    <link rel="stylesheet" type="text/css" href="../styles/index.css" />
+    <link rel="stylesheet" type="text/css" href="../styles/expandableitems.css" />
+    <link rel="stylesheet" type="text/css" href="../styles/otherpages.css" />
+    <script src="../app.js" defer></script>
+</head>
+
+<body>
+    <nav class="navbar">
+        <div class="expandable">
+            <div class="expandable__title-bar">
+            </div>
+            <div class="expandable__content-wrapper">
+                <ul class="expandable__content">
+                    <li class="list-items"><a href="../index.html">Home</a></li>
+                    <li class="list-items"><a href="aboutresume.html">About & Resume</a></li>
+                    <li class="list-items"><a href="contact.html">Contact</a></li>
+                    <div class="internal-expandable">
+                        <div class="internal-expandable__title-bar">
+                            <span class="internal-expandable__title">Portfolio</span>
+                            <ion-icon class="internal-expandable__icon" name="chevron-back"></ion-icon>
+                        </div>
+                        <div class="internal-expandable__content-wrapper">
+                            <div class="internal-expandable__content">
+                                <li class="list-items"><a href="sss.html">Soul Sync City</a></li>
+                                <li class="list-items"><a href="attachmentissues.html">Attachment Issues</a></li>
+                                <li class="list-items"><a href="partycrashers.html">Party Crashers</a></li>
+                                <li class="list-items"><a href="otherprojects.html">Other Projects</a></li>
+                                <li class="list-items"><a href="art.html">Art Showcase</a></li>
+                            </div>
+                        </div>
+                    </div>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    <div class="navspacer"></div>
+    <div class="main">
+        <div class="about" id="about">
+            <div class="spacer"></div>
+            <div class="stackable">
+                <div class="user-img">
+                    <img src="../styles/images/Headshot.jpg" />
+                </div>
+                <div>
+                    <h1>
+                        About Me
+                    </h1>
+                    <p>
+                        Hello! my name is Jason I am a game developer, programmer, and I dabble in some 3D modeling. I
+                        am
+                        currently
+                        enrolled at Bradley University pursuing a degree in game design and a minor in computer science
+                        information
+                        systems.
+                    </p>
+                </div>
+            </div>
+    
+        </div>
+        <div class="resume_container" id="resume_container">
+            <object data="../Resume.pdf" type="application/pdf">
+                <p>Alternative text - include a link <a href="../Resume.pdf">to the PDF!</a></p>
+            </object>
+        </div>
+    </div>
+
+    <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
+    <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
+</body>
+
+</html>

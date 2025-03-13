@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>h</title>
+    <link rel="stylesheet" type="text/css" href="../styles/index.css" />
+    <link rel="stylesheet" type="text/css" href="../styles/expandableitems.css" />
+    <link rel="stylesheet" type="text/css" href="../styles/otherpages.css" />
+    <script src="../app.js" defer></script>
+</head>
+
+<body>
+    <nav class="navbar">
+        <div class="expandable">
+            <div class="expandable__title-bar">
+            </div>
+            <div class="expandable__content-wrapper">
+                <ul class="expandable__content">
+                    <li class="list-items"><a href="../index.html">Home</a></li>
+                    <li class="list-items"><a href="aboutresume.html">About [&] Resume</a></li>
+                    <li class="list-items"><a href="contact.html">Contact</a></li>
+                    <div class="internal-expandable">
+                        <div class="internal-expandable__title-bar">
+                            <span class="internal-expandable__title">Portfolio</span>
+                            <ion-icon class="internal-expandable__icon" name="chevron-back"></ion-icon>
+                        </div>
+                        <div class="internal-expandable__content-wrapper">
+                            <div class="internal-expandable__content">
+                                <li class="list-items"><a href="sss.html">Soul Sync City</a></li>
+                                <li class="list-items"><a href="attachmentissues.html">Attachment Issues</a></li>
+                                <li class="list-items"><a href="partycrashers.html">Party Crashers</a></li>
+                                <li class="list-items"><a href="otherprojects.html">Other Projects</a></li>
+                                <li class="list-items"><a href="art.html">Art Showcase</a></li>
+                            </div>
+                        </div>
+                    </div>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    <div class="navspacer"></div>
+    <div class="main">
+
+        email: X
+
+    </div>
+
+    <form method= "post" action ="https://script.google.com/macros/s/AKfycbzdvMrMJ5PwaN6W7kiLrj5Vxjie81GMV4npae0EeRcKc1Ss9uKmmMNK6buQYKfLVzLj/exec" name = "contact-form">
+        <div class="row">
+            <div class="asdf">
+                <div class="basfas">
+                    <label for="fname">First Name</label>
+                    <input type="text" id="fname" name="firstname" placeholder="Your name..">
+                </div>
+                <div class="basfas">
+                    <label for="lname">Last Name</label>
+                    <input type="text" id="lname" name="lastname" placeholder="Your last name..">
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="asdf">
+                <div class="basfas">
+                    <label for="email">Email:</label>
+                    <input type="text" id="email" name="email" placeholder="Your email..">
+                </div>
+            </div>
+        </div>
+
+            <div class="asdf">
+                <div class="basfas">
+                    <label for="subject">Comment Or Message:</label>
+                    <textarea id="subject" name="message" placeholder="Write something.."
+                        style="height:200px"></textarea>
+                </div>
+            </div>
+
+        <br>
+        <div class="row">
+            <input type="submit" value="Submit">
+        </div>
+    </form>
+
+    <script src = "../sheet.js"></script>
+    <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
+    <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
+</body>
+
+</html>

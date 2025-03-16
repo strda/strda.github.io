@@ -43,11 +43,8 @@ document.body.addEventListener("click", (ev) =>
 
     if(isExpandableItem)
     {   
-        if(location.href.split(location.host)[1] != "/index.html")
+        if(location.href.split(location.host)[1] === "/index.html")
         {
-        window.location.href = "/index.html";
-        }
-        
         var txt = ev.target.closest(".list-items").textContent;
         if(txt == "About")
         {
@@ -61,7 +58,7 @@ document.body.addEventListener("click", (ev) =>
         {
             console.log("text is About");
         }
-        
+        }
     }
     else if(isExpandableTitle){
         expandable.classList.toggle("expandable--open");

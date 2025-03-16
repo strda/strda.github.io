@@ -97,6 +97,7 @@ h3{
 .section_title,
 .responsibilities,
 .worked_on_details,
+.download_link,
 .other_stuff,
 .section-divided__header {
     width: 100%;
@@ -124,6 +125,11 @@ h3{
 
 .section-divided__header {
     background-color: rgb(30, 30, 30);
+}
+
+.download_link
+{
+    background-color: rgb(84, 84, 84);
 }
 
 
@@ -192,7 +198,6 @@ h3{
 .section-divided-stack {
     padding: 0;
     line-height: 1.4;
-    font-size: 0.9em;
     color: black;
     border-radius: 0 0 var(--border-radius) var(--border-radius);
     overflow: hidden;

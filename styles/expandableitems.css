@@ -8,23 +8,20 @@
     font-size: 2em;
     font-family: 'Inter',sans-serif;
 
-   text-shadow: -1px -1px 0 purple, 1px -1px 0 purple, -1px 1px 0 purple, 1px 1px 0 purple;
+    
+    text-shadow: -1px -1px 0 purple, 1px -1px 0 purple, -1px 1px 0 purple, 1px 1px 0 purple;
     
 }
 
 
 .expandable--open .expandable__content-wrapper{
     grid-template-rows: 1fr;
- 
-
 }
 
-.expandable--open .expandable__icon {
-    transform: rotate(-90deg);
-}
 
 .expandable__title-bar
 {
+    justify-content: center;
     display: flex;
     align-items: center;
     user-select: none;
@@ -33,7 +30,6 @@
     background-color: rgb(22, 0, 21);
     width:100vw;
     height: 10vh;
-    padding-right: 2em;
 }
 .expandable__title-bar:hover
 {
@@ -75,7 +71,7 @@
     grid-template-rows: 1fr;
 }
 
-.internal-expandable--open .expandable__icon {
+.internal-expandable--open .internal__icon {
     transform: rotate(-90deg);
 }
 
@@ -155,6 +151,7 @@
     
     .expandable__title-bar
     {
+        margin-top:-20px;
         display: flex;
         align-items: center;
         user-select: none;
@@ -202,7 +199,7 @@
         align-items: center;
     }
     
-    .internal-expandable--open .expandable__icon {
+    .internal-expandable--open .internal__icon {
         transform: rotate(-90deg);
     }
     
@@ -220,7 +217,9 @@
     }
     .internal-expandable__title-bar:hover
     {
-        color:green
+        text-decoration: underline;
+        text-shadow: 0px 0px 0 purple;
+        color:purple
     }
     
     .internal-expandable__content
@@ -250,7 +249,7 @@
         display: block;
         margin-left: auto;
         margin-right: auto;
-        height: 48.44px;
+        
     }
 
     .list-items a{
@@ -261,10 +260,13 @@
     display: flex;
     align-items: center;
     padding: 10px 10px;
+    cursor: pointer; 
     
     }
     .list-items a:hover{
-    color:green
+        text-decoration: underline;
+        text-shadow: 0px 0px 0 purple;
+        color:purple
     }
 
     .portfolio_list{
@@ -284,6 +286,8 @@
     background-color: rgb(23, 23, 23);
     }
     .portfolio_list-items a:hover{
-    color:green
+        text-decoration: underline;
+        text-shadow: 0px 0px 0 purple;
+        color:purple
     }
 }

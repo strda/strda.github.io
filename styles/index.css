@@ -48,7 +48,7 @@ ul
     left: 0;
     justify-content: space-between;
     align-items: center;
-    height: 110px;
+    height: 15vh;
     background-color: rgb(22, 0, 21);
     width: 100%;
 }
@@ -96,11 +96,6 @@ ul
         color:white;
     }
     /* #region name */
-    .main
-    {
-        margin: 10px;
-        padding: 10px;
-    }
 
     html{
         scroll-behavior: smooth;
@@ -264,7 +259,7 @@ input[type=submit]:hover {
 /* #region name */
 .main
 {
-    --padding: 13vw;
+    --padding: 5vw;
     display: inline-block;
 }
 
@@ -311,6 +306,7 @@ input[type=submit]:hover {
 
 .main h1
 {
+    font-size: 40px;
     color:rgb(143, 0, 143);
     text-decoration: underline;
 }
@@ -496,17 +492,29 @@ input[type=submit]:hover {
 
 .clickable-button
 {
-    background-color: #04AA6D; /* Green */
-    border: none;
-    color: white;
-    padding: 20px;
-    text-align: center;
-    text-decoration: none;
+    -moz-user-select: none;
+    -webkit-user-select: none;
+    user-select: none;
+    box-sizing: border-box;
     display: inline-block;
-    font-size: 16px;
-    margin: 4px 2px;
+    background: #FF2449;
+    color: white;
+    text-decoration: none;
+    padding: 0 10px;
+    font-size: 20px;
+    text-shadow: 0 2px 0 #c3223e;
+    background: var(--itchio_button_color, #FF2449);
+    color: var(--itchio_button_fg_color, white);
+    text-shadow: 0 2px 0 var(--itchio_button_shadow_color, #c3223e);
     cursor: pointer;
-    border-radius: 12px;
+    border-radius: 3px;
+    border: none;
+    border: 2px solid rgba(0, 0, 0, 0.1);
+    box-shadow: inset 0 0 2px rgba(255, 255, 255, 0.21);
+    text-align: center;
+    line-height: 53px;
+    font-weight: bold;
+    height: 55px;
 }
 
 .user-img

@@ -1,17 +1,17 @@
-@media screen and (max-width:500px) {
+@media screen and (max-width:825px) {
 
 .expandable {
     --xy-padding: 14px;
     --border-radius: 6px
 
     max-width: 500px;
-    margin: .16em 0;
-    font-size: 0.9em;
+    font-size: 2em;
     font-family: 'Inter',sans-serif;
 
    text-shadow: -1px -1px 0 purple, 1px -1px 0 purple, -1px 1px 0 purple, 1px 1px 0 purple;
     
 }
+
 
 .expandable--open .expandable__content-wrapper{
     grid-template-rows: 1fr;
@@ -29,11 +29,10 @@
     align-items: center;
     user-select: none;
     border-radius: var(--border-radius) var(--border-radius) 0 0;
-    color: white;
     cursor: pointer; 
-    background-image: url(images/download.png);
+    background-color: rgb(22, 0, 21);
     width:100vw;
-    height: 20px;
+    height: 10vh;
     padding-right: 2em;
 }
 .expandable__title-bar:hover
@@ -45,7 +44,6 @@
 {
     padding: 0 0;
     line-height: 1.4;
-    font-size: 0.9em;
     color: black;
     border-radius: 0 0 var(--border-radius) var(--border-radius);
     overflow: hidden;
@@ -61,7 +59,7 @@
     
     grid-template-rows: 0fr;
     transition: grid-template-rows 0.3s ease-out;
-
+    background-color: rgb(22, 0, 21);
 }
 
 .internal-expandable {
@@ -69,8 +67,6 @@
     --border-radius: 6px
 
     max-width: 500px;
-    margin: .16em 0;
-    font-size: 0.9em;
     font-family: 'Inter',sans-serif;
     
 }
@@ -101,12 +97,13 @@
 {
     padding: 0 0;
     line-height: 1.4;
-    font-size: 0.9em;
     color: black;
     border-radius: 0 0  var(--border-radius) var(--border-radius);
     overflow: hidden;
     list-style: none;
     z-index: 1; 
+        padding-left: 40px;
+        background-color: rgb(22, 0, 21);
     
 }
 
@@ -128,7 +125,6 @@
 .list-items a{
     color: white;
     font-family: sans-serif;
-    font-size: 0.9em;
     transition: 0.4s;
 }
 .list-items a:hover{
@@ -136,14 +132,13 @@
 }
 }
 
-@media screen and (min-width:500px) {
+@media screen and (min-width:825px) {
 
     .expandable {
         --xy-padding: 14px;
         --border-radius: 6px
     
         max-width: 800px;
-        margin: .16em 0;
         font-size: 1.25em;
         font-family: 'Inter',sans-serif;
         text-shadow: -1px -1px 0 purple, 1px -1px 0 purple, -1px 1px 0 purple, 1px 1px 0 purple;
@@ -179,7 +174,7 @@
         margin-left: 5%;
         margin-right: 5%;
         padding: 2.5%;
-        height: 100px;
+        height: 15vh;
         justify-content: space-between;
         
     }
@@ -197,7 +192,7 @@
         max-width: 500px;
 
         padding: 0 10px;
-        font-size: 0.9em;
+        font-size: 1.25em;
         font-family: 'Inter',sans-serif;
 
     }
@@ -247,6 +242,7 @@
         
         grid-template-rows: 0fr;
         transition: grid-template-rows 0.3s ease-in;
+        
     }
 
     
@@ -254,16 +250,18 @@
         display: block;
         margin-left: auto;
         margin-right: auto;
+        height: 48.44px;
     }
 
     .list-items a{
     color: white;
     font-family: sans-serif;
-    font-size: 0.9em;
+    font-size: 1.25em;
     transition: 0.4s;
     display: flex;
     align-items: center;
     padding: 10px 10px;
+    
     }
     .list-items a:hover{
     color:green

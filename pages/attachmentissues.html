@@ -8,6 +8,7 @@
     <link rel="stylesheet" type="text/css" href="../styles/index.css" />
     <link rel="stylesheet" type="text/css" href="../styles/expandableitems.css" />
     <link rel="stylesheet" type="text/css" href="../styles/otherpages.css" />
+    <link href="../styles/prism.css" rel="stylesheet" />
     <script src="../app.js" defer></script>
 </head>
 
@@ -107,6 +108,8 @@
                 <div class="section-container">
                     <h2>Visual Effects</h2>
                 </div>
+                
+
                 <div class="section-container">
                     <li class="section-divided-equally">
                         <div class="image-container">
@@ -156,8 +159,199 @@
 
                 <div class="section-container">
                     <li class="section-divided-equally">
-                        <div class="image-container">
-                            <img src="../styles/images/download.png">
+                        <div class="code_container">
+                            <pre>
+                                <script src="../prism.js"></script>
+                                <code class = "language-js line-numbers line-highlight">
+                                using System.Collections;
+                                using System.Collections.Generic;
+                                using UnityEngine;
+                                public class PlayerBehavior : MonoBehaviour
+                                {
+                                    #region Variables
+                                    #region playerComponents
+                                    [Tooltip("Other Player Script")]
+                                    public PlayerBehavior otherPlayer;
+                        
+                                    [Tooltip("Players Camera Component")]
+                                    public Camera cam;
+                        
+                                    private CapsuleCollider coll;
+                                    #endregion
+                                    #region RaycastStuff
+                        
+                                    [Tooltip("Vector 3 Holding if the player has seen a specified object")]
+                                    public Vector3 testSeen;
+                                
+                                    [Tooltip("If the current player is looking at other player")]
+                                    public static bool isLooking;
+                                
+                                
+                                    [Tooltip("")]
+                                    public bool teleportToCrane;
+                                
+                                    private RaycastHit hit;
+                                    #endregion
+                        
+                                    #region Mirror stuff
+                                    [Tooltip("Layer of the mirror")]
+                                    public LayerMask layer;
+                                   
+                                    Plane[] calPlanes;
+                                   
+                                    /// <summary>
+                                    /// All the mirrors that are in the current scene
+                                    /// </summary>
+                                    private List<MirrorBehavior> mirrorsInScene = new List<MirrorBehavior>();
+                                   
+                                    /// <summary>
+                                    /// refrence to current plane that has been hit of mirror behaviour
+                                    /// </summary>
+                                    private GameObject plane;
+                                   
+                                    /// <summary>
+                                    /// refrence to MirrorBehaviour script that has been contains the plane that has been hit
+                                    /// </summary>
+                                    private MirrorBehavior mb;
+                                    #endregion
+                                    #endregion
+                        
+                                    void FixedUpdate()
+                                    {
+                                        if (!GameController.isDead)
+                                        {
+                                            if (cam.gameObject.activeInHierarchy)
+                                            {
+                        
+                                                /* Movement Code Ommited Here */
+                        
+                                                IsAnyMirror(out plane, out mb);
+                        
+                                                Vector3 h = RaycastToObj(otherPlayer.meshR.gameObject, "Player");
+                                                if(h == Vector3.zero)
+                                                    h = RaycastToObj(otherPlayer.cam.gameObject, "Player");
+                        
+                                                if (h != Vector3.zero)
+                                                {
+                                                    isLooking = true;
+                                                    Ambient();
+                                                }
+                                                else if (h == Vector3.zero && isLooking)
+                                                {
+                                                    isLooking = false;
+                                                    Ambient();
+                                                }
+                        
+                                            }
+                                        }
+                                    }
+                        
+                                    /// <summary>
+                                    /// Raycasts to object
+                                    /// </summary>
+                                    /// <param name="raycastedObj">object being raycasted<obj raycasted /param>
+                                    /// <returns>Look rotation</returns>
+                                    public Vector3 RaycastToObj(GameObject raycastedObj, string Tag = "")
+                                    {
+                                        if (cam.gameObject.activeInHierarchy)
+                                        {
+                                            if (Physics.Raycast(cam.transform.position, (raycastedObj.transform.position - cam.transform.position).normalized, out hit, Mathf.Infinity, ~layer) && CheckIsVisible(cam, raycastedObj))
+                                            {
+                                                if (hit.collider.gameObject == raycastedObj || tag != "" && hit.collider.gameObject.CompareTag(tag))
+                                                {
+                                                    Debug.DrawLine(cam.transform.position, hit.point, Color.red);
+                                                    return (raycastedObj.transform.position - cam.transform.position).normalized;
+                                                }
+                                                else
+                                                {
+                                                    Debug.DrawLine(cam.transform.position, hit.point, Color.blue);
+                                                }
+                                            }
+                                            else if (mb != null && raycastedObj != plane)
+                                            {
+                                                Vector3 dir = RaycastToObj(plane);
+                                            
+                                                if (dir != Vector3.zero)
+                                                {
+                                                    if (mb.MirrorStuff(this, otherPlayer, dir, plane))
+                                                        return dir;
+                                                }
+                                            
+                                            }
+                                        }
+                                        return Vector3.zero;
+                                    }
+                                
+                                    /// <summary>
+                                    /// Checks all mirrors in scene and if any of the planes are visible on that mirror then quits
+                                    /// otherwise the inputs will be set to null
+                                    /// </summary>
+                                    /// <param name="plane"> Plane that is seen from</param>
+                                    /// <param name="mb"> Script parent holding info to plane</param>
+                                    public void IsAnyMirror(out GameObject plane, out MirrorBehavior mb)
+                                    {
+                                        foreach (MirrorBehavior h in mirrorsInScene)
+                                        {
+                                            mb = h;
+                                            foreach (GameObject g in h.planes)
+                                            {
+                                                plane = g;
+                                                if (!IsVisible(g) && RaycastToObj(g) == Vector3.zero)
+                                                {
+                                                    h.Disable();
+                                                }
+                                                if (IsVisible(g) && RaycastToObj(g) != Vector3.zero)
+                                                {
+                                                    h.Enable();
+                                                    return;
+                                                }
+                                            }
+                                        }
+                                        plane = null;
+                                        mb = null;
+                                    }
+                                
+                                    /// <summary>
+                                    /// If both the x and y coordinate of the returned point is between 0 and 1 (and the z coordinate is positive)
+                                    /// then the point is seen by the camera aka returns true
+                                    /// </summary>
+                                    /// <param name="obj">Gameobject that checked if it is visible</param>
+                                    /// <returns>if obj is seen</returns>
+                                    public bool IsVisible(GameObject obj)
+                                    {
+                                        testSeen = cam.WorldToViewportPoint(obj.transform.position);
+                                    
+                                        if (testSeen.x >= -.02 && testSeen.x <= 1.05)
+                                        {
+                                            if (testSeen.y >= -.2 && testSeen.y <= 1)
+                                            {
+                                                if (testSeen.z >= 0)
+                                                {
+                                                    return true;
+                                                }
+                                            }
+                                        }
+                                        return false;
+                                    }
+                                
+                                    private bool CheckIsVisible(Camera c, GameObject target)
+                                    {
+                                        var planes = GeometryUtility.CalculateFrustumPlanes(c);
+                                        var point = target.transform.position;
+                                    
+                                        foreach (var plane in planes)
+                                        {
+                                            if (plane.GetDistanceToPoint(point) < 0)
+                                            {
+                                                return false;
+                                            }
+                                        
+                                        }
+                                        return true;
+                                    }
+                                }
+                                </code>
+                            </pre>
                         </div>
                     </li>
                     <li class="section-divided-equally">
@@ -166,18 +360,123 @@
 
                         </p>
                     </li>
-                    <li class="section-divided-equally">
-                        <h3>Code???</h3>
-                        <p>
-
-                        </p>
-                    </li>
                 </div>
 
                 <div class="section-container">
                     <li class="section-divided-equally">
-                        <div class="image-container">
-                            <img src="../styles/images/download.png">
+                        <div class="code_container">
+                            <pre>
+                                <script src="../prism.js"></script>
+                                <code class = "language-C# line-numbers">
+                                using System.Collections;
+                                using System.Collections.Generic;
+                                using UnityEngine;
+                        
+                                public class MirrorBehavior : MonoBehaviour
+                                {
+                                    public GameObject camObj;
+                                    private Camera cam;
+                                    public GameObject[] planes = new GameObject[2];
+                                    public PlayerBehavior p1;
+                                    public PlayerBehavior p2;
+                                    private RaycastHit hit;
+                                    public GameObject reflectionProbe;
+                        
+                                    Plane[] calPlanes;
+                        
+                                    public bool isSeen;
+                        
+                                    private void Awake()
+                                    {
+                                        cam = camObj.GetComponent<Camera>();
+                                    }
+                                
+                                    private void SetCamFov(PlayerBehavior player, GameObject plane)
+                                    {
+                                        float t = Vector3.Distance(player.transform.position, plane.transform.position);
+                                        cam.fieldOfView = 60 * Mathf.Pow(Mathf.Exp(1), -0.077f * t);
+                                        /*
+                                         * ^ IMPORTANT CAN BE MORE PRECISE
+                                        */
+                                    }
+                                
+                                    /// <summary>
+                                    /// If both the x and y coordinate of the returned point is between 0 and 1 (and the z coordinate is positive)
+                                    /// then the point is seen by the camera aka returns true
+                                    /// </summary>
+                                    /// <param name="obj">Gameobject that checked if it is visible</param>
+                                    /// <returns>if obj is seen</returns>
+                                    public bool IsVisible(GameObject obj)
+                                    {
+                                        Vector3 testSeen = cam.WorldToViewportPoint(obj.transform.position);
+                                    
+                                        if (testSeen.x >= -.1 && testSeen.x <= 1)
+                                        {
+                                            if (testSeen.y >= -.1 && testSeen.y <= 1)
+                                            {
+                                                if (testSeen.z >= 0)
+                                                {
+                                                    return true;
+                                                }
+                                            }
+                                        }
+                                        return false;
+                                    }
+                                
+                                    /// <summary>
+                                    /// 
+                                    /// </summary>
+                                    /// <param name="currentPlayer">Current Active Player</param>
+                                    /// <param name="otherPlayer"> Other Inactive Player</param>
+                                    /// <param name="dir">Direction of the player looking at mirror</param>
+                                    public bool MirrorStuff(PlayerBehavior currentPlayer, PlayerBehavior otherPlayer, Vector3 dir, GameObject plane)
+                                    {
+                                        if (dir != Vector3.zero)
+                                        {
+                                            Vector3 h = Vector3.Reflect(dir, plane.transform.up);
+                                        
+                                            Debug.DrawRay(transform.position, h, Color.green);
+                                        
+                                            camObj.transform.rotation = Quaternion.LookRotation(h);
+                                        
+                                            SetCamFov(currentPlayer, plane);
+                                        
+                                            if (GeometryUtility.TestPlanesAABB(calPlanes, currentPlayer.p_Renderer.bounds))
+                                            {
+                                                print(otherPlayer.name + " is detected");
+                                            }
+                                        
+                                            calPlanes = GeometryUtility.CalculateFrustumPlanes(cam);
+                                        
+                                            if (GeometryUtility.TestPlanesAABB(calPlanes, currentPlayer.p_Renderer.bounds) &&
+                                                Physics.Raycast(cam.transform.position, (currentPlayer.otherPlayer.cam.transform.position - cam.transform.position).normalized, out hit, Mathf.Infinity, ~currentPlayer.layer))
+                                            {
+                                                Debug.DrawLine(cam.transform.position, hit.point, Color.blue);
+                                                if (hit.collider.gameObject.Equals(otherPlayer.gameObject))
+                                                {
+                                                    return true;
+                                                }
+                                            }
+                                        }
+                                        return false;
+                                    
+                                    }
+                                
+                                    public void Enable()
+                                    {
+                                        cam.gameObject.SetActive(true);
+                                        reflectionProbe.SetActive(true);
+                                    }
+                                
+                                    public void Disable()
+                                    {
+                                        cam.gameObject.SetActive(false);
+                                        reflectionProbe.SetActive(false);
+                                    }
+                                }   
+                        
+                                </code>
+                            </pre>
                         </div>
                     </li>
                     <li class="section-divided-equally">
@@ -186,14 +485,10 @@
 
                         </p>
                     </li>
-                    <li class="section-divided-equally">
-                        <h3>Code???</h3>
-                        <p>
-
-                        </p>
-                    </li>
                 </div>
             </div>
+
+
         </div>
         <div class="download_link">
             <div class="section-divided-stack">
@@ -206,9 +501,7 @@
         </div>
     </section>
 
-
-
-
+    
     <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
     <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
 </body>

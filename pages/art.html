@@ -44,8 +44,10 @@
         </div>
     </nav>
     <div class="navspacer"></div>
-    <h1>3D Models</h1>
-    <div class="section-container">
+
+    <section class="otherpages">
+        <h1>3D Models</h1>
+        <div class="section-container">
             <div class="grid-element" alt="Robot Color Picker">
                 <model-viewer id="pickMaterial" poster="../styles/images/download.png" shadow-intensity="1"
                     camera-controls touch-action="pan-y" disable-tap src="../styles/models/RobotDuplicate.glb" ar
@@ -651,10 +653,10 @@
                         modelViewer.addEventListener("load", loadModelAnimations);
 
                         function loadModelAnimations() {
-                                modelViewer.removeAttribute("camera-orbit");
+                            modelViewer.removeAttribute("camera-orbit");
                             modelViewer.availableAnimations.forEach(animationName => {
                                 if (animationName !== "TPose")
-                                modelViewer.play(animationName);
+                                    modelViewer.play(animationName);
                             });
                         }
 
@@ -679,85 +681,85 @@
                     Concept Idea for a weapon I decided to 3D model
                 </p>
             </div>
-    </div>
+        </div>
 
-    <h1>2D Art</h1>
-    <div class="section-container">
-        <div class="grid-element" alt="Bread">
-            <div class="image-container">
-                <img src="../styles/art/Bread.gif">
+        <h1>2D Art</h1>
+        <div class="section-container">
+            <div class="grid-element" alt="Bread">
+                <div class="image-container">
+                    <img src="../styles/art/Bread.gif">
+                </div>
+                <h4>
+                    Bread Skate
+                </h4>
+                <p>
+                    🥖+🛹
+                </p>
             </div>
-            <h4>
-                Bread Skate
-            </h4>
-            <p>
-                🥖+🛹
-            </p>
-        </div>
-        <div class="grid-element" alt="Kirby">
-            <div class="image-container">
-                <img src="../styles/art/Kirby.png">
+            <div class="grid-element" alt="Kirby">
+                <div class="image-container">
+                    <img src="../styles/art/Kirby.png">
+                </div>
+                <h4>
+                    Sleeping Kirby
+                </h4>
+                <p>
+                    Made for Wakey Wakey's Costume Contest to potentially be put into that game
+                </p>
             </div>
-            <h4>
-                Sleeping Kirby
-            </h4>
-            <p>
-                Made for Wakey Wakey's Costume Contest to potentially be put into that game 
-            </p>
-        </div>
-        <div class="grid-element" alt="Help">
-            <div class="image-container">
-                <img src="../styles/art/Help.gif">
+            <div class="grid-element" alt="Help">
+                <div class="image-container">
+                    <img src="../styles/art/Help.gif">
+                </div>
+                <h4>
+                    LOREM IPSUM
+                </h4>
+                <p>
+                    LOREM IPSUM
+                </p>
             </div>
-            <h4>
-                LOREM IPSUM
-            </h4>
-            <p>
-                LOREM IPSUM
-            </p>
-        </div>
-        <div class="grid-element" alt="Snek">
-            <div class="image-container">
-                <img src="../styles/art/Snek.png">
+            <div class="grid-element" alt="Snek">
+                <div class="image-container">
+                    <img src="../styles/art/Snek.png">
+                </div>
+                <h4>
+                    Pet Snake
+                </h4>
+                <p>
+                    LOREM IPSUM
+                </p>
             </div>
-            <h4>
-                Pet Snake
-            </h4>
-            <p>
-                LOREM IPSUM
-            </p>
-        </div>
-        <div class="grid-element" alt="Monster">
-            <div class="big_image-container">
-                <img src="../styles/art/Monster.png" id="monsters">
+            <div class="grid-element" alt="Monster">
+                <div class="big_image-container">
+                    <img src="../styles/art/Monster.png" id="monsters">
+                </div>
+                <script>
+                    const pngs = ['Monster.png', 'Monster_Sketch_Resize.JPG'];
+                    const mons = document.querySelector('#monsters');
+                    let jf = 0;
+                    setInterval(() => mons.setAttribute('src', `../styles/art/${pngs[jf++ % 2]}`), 2000);
+                </script>
+                <h4>
+                    Lizard-like Creature
+                </h4>
+                <p>
+                    LOREM IPSUM
+                </p>
             </div>
-            <script>
-                const pngs = ['Monster.png', 'Monster_Sketch_Resize.JPG'];
-                const mons = document.querySelector('#monsters');
-                let jf = 0;
-                setInterval(() => mons.setAttribute('src', `../styles/art/${pngs[jf++ % 2]}`), 2000);
-            </script>
-            <h4>
-                Lizard-like Creature
-            </h4>
-            <p>
-                LOREM IPSUM
-            </p>
-        </div>
-        <div class="grid-element" alt="Poster Design">
-            <div class="big_image-container">
-                <img src="../styles/art/TCGClubPosterV2.png">
+            <div class="grid-element" alt="Poster Design">
+                <div class="big_image-container">
+                    <img src="../styles/art/TCGClubPosterV2.png">
+                </div>
+                <h4>
+                    College TCG Club Poster
+                </h4>
+                <p>
+                    Poster I designed for a club at my school that was not used
+                </p>
             </div>
-            <h4>
-                College TCG Club Poster
-            </h4>
-            <p>
-                Poster I designed for a club at my school that was not used
-            </p>
         </div>
-    </div>
-    <div class="section-divided-centered" alt="Web Design Project">
-        <div class="section-divided-stack">
+
+        <div class="webdesing_project"  alt="Web Design Project">
             <div class="banner_image-container">
                 <img src="../styles/art/Shull_Jason_WebDesignProject-1.png">
             </div>
@@ -769,16 +771,17 @@
                     Children Website Idea
                 </h4>
                 <p>
-                    Website Idea I made for a class which teaches kids about math with dinosaurs 
+                    Website Idea I made for a class which teaches kids about math with dinosaurs
                 </p>
             </div>
-
         </div>
-    </div>
 
-    <script type="module" src="https://ajax.googleapis.com/ajax/libs/model-viewer/4.0.0/model-viewer.min.js"></script>
-    <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
-    <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
+
+        <script type="module"
+            src="https://ajax.googleapis.com/ajax/libs/model-viewer/4.0.0/model-viewer.min.js"></script>
+        <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
+        <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
+    </section>
 </body>
 
 </html>

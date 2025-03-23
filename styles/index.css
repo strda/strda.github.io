@@ -15,7 +15,7 @@
 
 html{
     scroll-behavior: smooth;
-    background-color: black;
+    background-color: #101010;
 }
 
 
@@ -270,9 +270,19 @@ input[type=submit]:hover {
 }
 
 
+.ending
+{
+    background-color: #101010;
+    width: 100%;
+    height: 100%;
+    padding: 10px;
+    padding-left: var(--padding);
+    padding-right: var(--padding);
+}
+
 .about
 {
-    background-color: #181818;
+    background-color: #2b2b2b;
     width: 100%;
     height: 100%;
     padding: 10px;
@@ -294,10 +304,21 @@ input[type=submit]:hover {
 {
     width: 100%;
     height: 100%;
-    background-color: #252525;
+    background-color: #323232;
     padding: 10px;
     padding-left: var(--padding);
     padding-right: var(--padding);
+}
+
+.code_container
+{
+    width: 100%;
+    height: 100%;
+    padding: 10px;
+    min-width: 500px;
+    max-width: 1000px;
+    padding-left: 10px;
+    padding-right: 10px;
 }
 
 .resume_container
@@ -318,6 +339,7 @@ input[type=submit]:hover {
 {
     font-size: 40px;
     color:rgb(143, 0, 143);
+    text-shadow: -1px -1px 0 rgb(42, 0, 42), 1px -1px 0 rgb(42, 0, 42), -1px 1px 0 rgb(42, 0, 42), 1px 1px 0 rgb(42, 0, 42);
     text-decoration: underline;
 }
 
@@ -335,6 +357,7 @@ input[type=submit]:hover {
 {
     width: auto;
     height: auto;
+    text-shadow: -2px -2px 0 rgb(42, 0, 42), 2px -2px 0 rgb(42, 0, 42), -2px 2px 0 rgb(42, 0, 42), 2px 2px 0 rgb(42, 0, 42);
     max-width: var(--gridwidth);
     max-height: var(--gridwidth);
     position: relative;
@@ -347,6 +370,7 @@ input[type=submit]:hover {
 .grid-element h4
 {
     color: rgb(236, 236, 236);
+    text-shadow: -2px -2px 0 rgb(42, 0, 42), 2px -2px 0 rgb(42, 0, 42), -2px 2px 0 rgb(42, 0, 42), 2px 2px 0 rgb(42, 0, 42);
     width: 100%;
     height: auto;
     max-width: var(--gridwidth);

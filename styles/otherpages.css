@@ -30,11 +30,12 @@
     margin-left: auto;
     margin-right: auto;
     text-decoration: underline;
+    text-shadow: -1px -1px 0 rgb(42, 0, 42), 1px -1px 0 rgb(42, 0, 42), -1px 1px 0 rgb(42, 0, 42), 1px 1px 0 rgb(42, 0, 42);
 }
 .textlist_bulletpoint li
 {
     list-style:disc;
-    
+    text-shadow: -1px -1px 0 rgb(42, 0, 42), 1px -1px 0 rgb(42, 0, 42), -1px 1px 0 rgb(42, 0, 42), 1px 1px 0 rgb(42, 0, 42);
     font-size: 16px;
     margin-left: 25px;
     margin-right: auto;
@@ -49,17 +50,20 @@ h1{
     align-items: center;
     justify-content: center;
     font-size: 2.5em;
+    text-shadow: -1px -1px 0 rgb(42, 0, 42), 1px -1px 0 rgb(42, 0, 42), -1px 1px 0 rgb(42, 0, 42), 1px 1px 0 rgb(42, 0, 42);
 }
 
 h2{
     /*background-color: red;*/
     color: purple;
+    text-shadow: -1px -1px 0 rgb(42, 0, 42), 1px -1px 0 rgb(42, 0, 42), -1px 1px 0 rgb(42, 0, 42), 1px 1px 0 rgb(42, 0, 42);
     font-size: 2em;
 }
 
 h3{
     /*background-color: red;*/
     color: purple;
+    text-shadow: -1px -1px 0 rgb(42, 0, 42), 1px -1px 0 rgb(42, 0, 42), -1px 1px 0 rgb(42, 0, 42), 1px 1px 0 rgb(42, 0, 42);
     font-size: 1.5em;
 }
 
@@ -119,18 +123,18 @@ h3{
 
 .worked_on_details
 {
-    background-color: rgb(76, 76, 76);
+    background-color: rgb(40, 40, 40);
 }
 
+.download_link
+{
+    background-color: rgb(54, 54, 54);
+}
 
 .section-divided__header {
     background-color: rgb(30, 30, 30);
 }
 
-.download_link
-{
-    background-color: rgb(84, 84, 84);
-}
 
 
 /* Flex-based Section Styling */
@@ -181,10 +185,12 @@ h3{
 .section-divided-equally h3
 {
     font-size: 1.5em;
+    text-shadow: -1px -1px 0 rgb(42, 0, 42), 1px -1px 0 rgb(42, 0, 42), -1px 1px 0 rgb(42, 0, 42), 1px 1px 0 rgb(42, 0, 42);
 }
 .section-divided-equally p
 {
     font-size: 1em;
+    text-shadow: -1px -1px 0 rgb(42, 0, 42), 1px -1px 0 rgb(42, 0, 42), -1px 1px 0 rgb(42, 0, 42), 1px 1px 0 rgb(42, 0, 42);
 }
 
 /* Centered Content */

@@ -203,10 +203,13 @@ h3{
 /* Video Container */
 .video-container {
     width: 100%;
+    margin-left: auto;
+    margin-right: auto;
     height: 100%;
     position: relative;
 }
 
+@media screen and (min-width: 600px) {
 .section-divided-equally-centered .video-container iframe
 {
     width: 400px;
@@ -214,9 +217,36 @@ h3{
 }
 .section-h-left .video-container iframe
 {
-    width: 577px; 
-    height: 313.3125px;
+    width: 576px; 
+    height: 312px;
 }
+}
+@media screen and (max-width: 600px) {
+    .section-divided-equally-centered .video-container iframe
+    {
+        width: 100px; 
+        height: 100px;
+    }
+    .section-h-left .video-container iframe
+    {
+        width: 389px; 
+        height: 210px;
+    }
+}
+@media screen and (min-width: 340px) and (max-width:500px) {
+    .section-divided-equally-centered .video-container iframe
+    {
+        width: 330px; 
+        height: 155px;
+    }
+    .section-h-left .video-container iframe
+    {
+        width: 330px; 
+        height: 155px;
+    }
+}
+
+
 
 
 .video-container video {

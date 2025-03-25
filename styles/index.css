@@ -3,7 +3,7 @@
 *{
     margin: 0;
     box-sizing: border-box;
-    font-size: 20;
+    font-size: 20px;
     color:white;
 }
 
@@ -290,6 +290,16 @@ input[type=submit]:hover {
     padding-right: var(--padding);
 }
 
+.resume_section
+{
+    background-color: #101010;
+    width: 100%;
+    height: 100%;
+    padding: 10px;
+    padding-left: var(--padding);
+    padding-right: var(--padding);
+}
+
 .webdesing_project
 {
     width: 100%;
@@ -323,10 +333,10 @@ input[type=submit]:hover {
 
 .resume_container
 {
-    width: 100%;
-    height: 100%;
-    justify-content: center;
-    position: absolute;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 2%;
 }
 
 .resume_container object
@@ -334,13 +344,22 @@ input[type=submit]:hover {
     width: 100%;
     height: 100%;
 }
+.main h1,
+h1{
+    /*background-color: red;*/
+    color: purple;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+    font-size: 2.5em;
+    text-shadow: -1px -1px 0 rgb(42, 0, 42), 1px -1px 0 rgb(42, 0, 42), -1px 1px 0 rgb(42, 0, 42), 1px 1px 0 rgb(42, 0, 42);
+}
 
 .main h1
 {
-    font-size: 40px;
-    color:rgb(143, 0, 143);
-    text-shadow: -1px -1px 0 rgb(42, 0, 42), 1px -1px 0 rgb(42, 0, 42), -1px 1px 0 rgb(42, 0, 42), 1px 1px 0 rgb(42, 0, 42);
     text-decoration: underline;
+    padding-bottom: 1%;
 }
 
 .grid-element
@@ -531,15 +550,15 @@ input[type=submit]:hover {
     user-select: none;
     box-sizing: border-box;
     display: inline-block;
-    background: #FF2449;
+    background:rgb(143, 0, 143);
     color: white;
     text-decoration: none;
     padding: 0 10px;
     font-size: 20px;
-    text-shadow: 0 2px 0 #c3223e;
-    background: var(--itchio_button_color, #FF2449);
+    text-shadow: 0 2px 0 rgb(42, 0, 42);
+    background: var(--itchio_button_color, rgb(143, 0, 143));
     color: var(--itchio_button_fg_color, white);
-    text-shadow: 0 2px 0 var(--itchio_button_shadow_color, #c3223e);
+    text-shadow: 0 2px 0 var(--itchio_button_shadow_color, rgb(42, 0, 42));
     cursor: pointer;
     border-radius: 3px;
     border: none;
@@ -549,6 +568,11 @@ input[type=submit]:hover {
     line-height: 53px;
     font-weight: bold;
     height: 55px;
+}
+
+.formatedtxt
+{
+    padding: 0% 10%;
 }
 
 .user-img

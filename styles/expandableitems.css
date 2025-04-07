@@ -151,6 +151,11 @@
         font-family: 'Inter',sans-serif;
         text-shadow: -1px -1px 0 purple, 1px -1px 0 purple, -1px 1px 0 purple, 1px 1px 0 purple;
     }
+    
+    .expandable__content-wrapper
+    {
+        height: 100px;
+    }
 
     .expandable--open .expandable__content-wrapper{
         grid-template-rows: 1fr;

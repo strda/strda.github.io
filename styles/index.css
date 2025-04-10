@@ -319,8 +319,13 @@ input[type="submit"]:hover {
   padding: 10px;
   min-width: 500px;
   max-width: 1000px;
-  padding-left: 10px;
-  padding-right: 10px;
+  padding-left: auto;
+  padding-right: auto;
+}
+
+.code_container h3
+{
+justify-self: center;
 }
 
 .resume_container {

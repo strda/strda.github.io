@@ -8,6 +8,7 @@
     <link rel="stylesheet" type="text/css" href="../styles/index.css" />
     <link rel="stylesheet" type="text/css" href="../styles/expandableitems.css" />
     <link rel="stylesheet" type="text/css" href="../styles/otherpages.css" />
+    <link href="../styles/prism.css" rel="stylesheet" />
     <script src="../app.js" defer></script>
 </head>
 
@@ -104,7 +105,7 @@
         <div class="worked_on_details">
             <div class="section-divided-stack">
                 <div class="section-container">
-                    <h2>LOREM IPSUM</h2>
+                    <h2>My Contributions:</h2>
                 </div>
                 <div class="section-container">
                     <li class="section-divided-equally-centered">
@@ -116,13 +117,15 @@
                         </div>
                     </li>
                     <li class="section-divided-equally">
-                        <h3>LOREM IPSUM</h3>
+                        <h3>Animation Syncing</h3>
                         <p>
                             designed and developed code to sync enemy attacks with animation MANUALLY. Since at the
                             time didn't know about animation events that unity has builtin
                         </p>
                     </li>
                 </div>
+
+
                 <div class="section-container">
                     <li class="section-divided-equally-centered">
                         <div class="video-container">
@@ -140,6 +143,7 @@
                         </p>
                     </li>
                 </div>
+
                 <div class="section-container">
                     <li class="section-divided-equally-centered">
                         <div class="video-container">
@@ -155,6 +159,225 @@
                             implemented the functionality behind this just to show how many points the player recieves
                             when defeating an enemy
                         </p>
+                    </li>
+                </div>
+
+                <div class="section-container">
+                    <li class="code_container">
+                        <h3>Animation Sync Code</h3>
+                        <pre>
+                            <script src="../prism.js"></script>
+<code class = "language-csharp line-numbers">using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+public class BirdBehaviour : MonoBehaviour
+{
+    public BirdBehaviour bb;
+
+    [Tooltip("Reference to the projectile that the bird shoots")]
+    [SerializeField]
+    private GameObject Projectile;
+
+    [Tooltip("The difference between the bird origin and the projectile spawn point ")]
+    [SerializeField]
+    private float ProjectileOffset;
+
+    //the current projectile
+    public List&lt;GameObject&gt; CurrentProjectiles = new List&lt;GameObject&gt;();
+
+    [Tooltip("the different colors the pelican can be")]
+    [SerializeField]
+    private List&lt;Material&gt; Colors;
+
+    [Tooltip("Reference to the beak")]
+    [SerializeField]
+    private GameObject Beak;
+
+    [Tooltip("This will shut off some functions of the full bird")]
+    [SerializeField]
+    private bool isTutorial;
+
+    [Tooltip("represents what the tutorial bird is trying to do ")]
+    [SerializeField]
+    private GameObject TutorialWaiter;
+
+    private Animator playerAnimator;
+    public int currentFrame = 0;
+    AnimatorClipInfo[] animationClip;
+    int amountTimeLooped=0;
+    [SerializeField] private bool spawnedOne;
+
+    bool previousAttacked;
+
+    private bool startingAttack;
+
+    public int attackNum = 0;
+
+
+    private void FixedUpdate()
+    {
+        
+        if (playerAnimator.GetCurrentAnimatorStateInfo(0).IsName("Attack"))
+        {
+            animationClip = playerAnimator.GetCurrentAnimatorClipInfo(0);
+
+            if (playerAnimator.GetCurrentAnimatorStateInfo(0).normalizedTime - amountTimeLooped &gt; 1)
+            {
+                amountTimeLooped++;
+            }
+            //code to convert the normalized time into frames so i can get exact frame to spawn projectile
+            currentFrame = (int)((playerAnimator.GetCurrentAnimatorStateInfo(0).normalizedTime - amountTimeLooped) * (animationClip[0].clip.length * 24));
+        }
+        else if(amountTimeLooped != 0)
+        {
+            amountTimeLooped = 0;
+        }        
+    }
+
+    // Update is called once per frame
+    void Update()
+    {
+        Rotate();
+        if (bb != null && bb.playerAnimator.GetCurrentAnimatorStateInfo(0).IsName("Attack"))
+        {
+            previousAttacked = true;
+        }
+        else if (bb != null && !bb.playerAnimator.GetCurrentAnimatorStateInfo(0).IsName("Attack") && !playerAnimator.GetCurrentAnimatorStateInfo(0).IsName("Attack") && previousAttacked && !startingAttack)
+        {
+            startingAttack = true;
+            previousAttacked = false;
+            StartCoroutine(Attack());
+        }
+
+        if (!playerAnimator.GetCurrentAnimatorStateInfo(0).IsName("Attack") && TutorialWaiter == null && isTutorial && !startingAttack)
+        {
+            startingAttack = true;
+            StartCoroutine(Attack());
+        }
+        else if (playerAnimator.GetCurrentAnimatorStateInfo(0).IsName("Attack")
+        && currentFrame == 123 && !spawnedOne)
+        {
+            //frame 123 is the frame of the animation that the projectile spawns
+            CheckProjectile();
+        }
+        else if (currentFrame &gt;= 124)
+        {
+            spawnedOne = false;
+            startingAttack = false;
+        }
+    }
+
+    /// &lt;summary&gt;
+    /// Checks if has spawned a projectile already which if not it spawns one
+    /// and makes it so it cant spawn another until its reset
+    /// &lt;summary&gt;
+    private void CheckProjectile()
+    {
+        if (!spawnedOne)
+        {
+            CurrentProjectiles.Add(Instantiate(Projectile, Beak.transform.position + (transform.forward * ProjectileOffset), transform.rotation));
+            CurrentProjectiles[CurrentProjectiles.Count - 1].GetComponent&lt;BirdProjectileScript&gt;().ConnectToBird(this);
+            spawnedOne = !spawnedOne;
+        }
+    }
+
+    public IEnumerator Attack()
+    {
+        attackNum++;
+        if (gameObject.name != "Tutorial_Bird")
+        {
+            /Ommited code for this but it basically just does the sound for regular bird
+            StartCoroutine(AttackSound(attackNum));
+        }
+        else
+        {
+            //Ommited code for this but it basically just does the sound for tutorial bird
+            StartCoroutine(TutorialAttackSound(attackNum));
+        }
+        yield return new WaitForSeconds(.4f);
+        playerAnimator.SetTrigger("AttackTrigger");
+    }
+</code>
+                        </pre>
+                    </li>
+                </div>
+
+                <div class="section-container">
+                    <li class="code_container">
+                        <h3>Flash Behaviour Code</h3>
+                        <pre>
+                            <script src="../prism.js"></script>
+<code class = "language-csharp line-numbers">using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+    [SerializeField]
+    private SkinnedMeshRenderer[] Body;
+    [SerializeField]
+    private Material flash;
+    [SerializeField]
+    private Material originalMaterial;
+    [Tooltip("The particle appears after the hyena is destroyed")]
+    [SerializeField]
+    private GameObject deathParticle1;
+    [Tooltip("The object that appears after the hyena is destroyed")]
+    [SerializeField]
+    private GameObject shatteredEnemy;
+
+    /// &lt;summary&gt;
+    ///
+    /// &lt;summary&gt;
+    ///&lt;param name="collision"&gt;&lt;param&gt;
+    private void OnCollisionEnter(Collision collision)
+    {
+        if (collision.gameObject.tag.Equals("Bat"))
+        {
+            FindObjectOfType&lt;AudioManager&gt;().Play("Hit_Enemy");
+            lives--;
+            //would play the reaction animation of the enemy but i ommited 
+            HitReaction();
+            Flash();
+        }
+    }
+
+    private void HitReaction()
+    {
+        if (lives &lt;= 0)
+        {
+            FindObjectOfType&lt;AudioManager&gt;().Play("Enemy_Death" + Random.Range(0, 4).ToString());
+            Destroy(Instantiate(deathParticle1, transform.position, Quaternion.identity), 15f);
+            Destroy(Instantiate(shatteredEnemy, transform.position, transform.rotation), 5f);
+            pb.AddScore(points);
+            Destroy(gameObject);
+        }
+
+    }
+
+    private void Flash()
+    {
+        foreach(SkinnedMeshRenderer g in Body)
+        {
+            //since all material in body was the same can just do this 
+            g.material = flash;
+        }
+
+        StartCoroutine(EndFlash());
+    }
+
+    private IEnumerator EndFlash()
+    {
+        yield return new WaitForSeconds(.25f);
+
+        foreach (SkinnedMeshRenderer g in Body)
+        {
+            //since all material in body was the same can just do this 
+            g.material = originalMaterial;
+        }
+
+        yield return null;
+    }
+</code>
+                        </pre>
                     </li>
                 </div>
             </div>

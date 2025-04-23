@@ -8,6 +8,7 @@
     <link rel="stylesheet" type="text/css" href="../styles/index.css" />
     <link rel="stylesheet" type="text/css" href="../styles/expandableitems.css" />
     <link rel="stylesheet" type="text/css" href="../styles/otherpages.css" />
+    <link href="../styles/prism.css" rel="stylesheet" />
     <script src="../app.js" defer></script>
 </head>
 
@@ -46,9 +47,6 @@
     </nav>
     <div class="navspacer"></div>
     <section class="otherpages">
-        <div class = "wip">
-            <h1>WARNING THIS PAGE IS STIL WIP</h1>
-        </div>
         <div class="section_title">
             <h1>Home For Now</h1>
             <div class="section-container">
@@ -97,8 +95,10 @@
                         <h4>Mini Games</h4>
                         <li>Rhytmn Game</li>
                         <li>Mouse Catching</li>
-                        <h4>LOREM IPSUM</h4>
+                        <li>Default MiniGame</li>
+                        <h4>Other</h4>
                         <li>Debuggging</li>
+                        <li>Game End States/Gameplay Loop</li>
                     </div>
                 </div>
             </div>
@@ -106,79 +106,443 @@
         <div class="worked_on_details">
             <div class="section-divided-stack">
                 <div class="section-container">
-                    <h2>LOREM IPSUM</h2>
+                    <h2>My Contributions:</h2>
                 </div>
                 <div class="section-container">
                     <li class="section-divided-equally-centered">
                         <div class="grid-element" alt="LongPlatform">
                             <model-viewer src="../styles/models/CatFood.glb" ar ar-modes="webxr scene-viewer quick-look"
-                                poster="../styles/images/download.png" camera-controls tone-mapping="neutral" shadow-intensity="1"
-                                auto-rotate rotation-per-second="20deg" disable-tap>
+                                poster="../styles/images/download.png" camera-controls tone-mapping="neutral"
+                                shadow-intensity="1" auto-rotate rotation-per-second="20deg" disable-tap>
                             </model-viewer>
                         </div>
                     </li>
                     <li class="section-divided-equally">
                         <h3>Rhytmn Minigame</h3>
                         <p>
-                            LOREM IPSUM
-                        </p>
-                    </li>
-                </div>
-                <div class="section-container">
-                    <li class="section-divided-equally-centered">
-                        <div class="image-container">
-                            <img src="../styles/images/download.png" alt="Full-size image">
-                        </div>
-                    </li>
-                    <li class="section-divided-equally">
-                        <h3>LOREM IPSUM</h3>
-                        <p>
-                            LOREM IPSUM
+                            3D object I made for the cat Rhythm minigame
                         </p>
                     </li>
                 </div>
 
-                <div class="section-container">
-                    <li class="section-divided-equally-centered">
-                        <div class="image-container">
-                            <img src="../styles/images/gumball.png" alt="Full-size image">
-                        </div>
-                    </li>
-                    <li class="section-divided-equally">
-                        <h3>LOREM IPSUM</h3>
-                        <p>
-                            LOREM IPSUM
-                        </p>
+                <div class="section-container" alt = "Game Controller Code">
+                    <li class="code_container">
+                        <h3>Game Controller Code</h3>
+                        <pre>
+<script src="../prism.js"></script>
+<code class = "language-csharp line-numbers">using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+using UnityEngine.UI;
+using TMPro;
+using UnityEngine.SceneManagement;
+
+public class GameController : MonoBehaviour
+{
+    private const int MAX_TASK_DAY = 5;
+    public static int tasksDone = 0;
+    public static GameController gc;
+    public GameObject fadeInOutObj;
+    public List&lt;TextMeshProUGUI&gt; scoreObjects = new List&lt;TextMeshProUGUI&gt;();
+    public TextMeshProUGUI textObj;
+    public static int day = 1;
+    public static int amountCats = 0;
+    const string glyphs = "$$anonymous$$0123456789!@#$%^&*()";
+    //AKA THE MINIGAME SELECTED
+    public ClickableObjectBehavior minigameObject;
+
+    public MouseScript ms;
+    public GameObject map;
+
+    public AudioClip failedMiniGame;
+    public AudioClip winMiniGame;
+
+    public GameObject catSelection;
+
+    public List&lt;GameObject&gt; catButtons = new List&lt;GameObject&gt;();
+
+    public static List&lt;string&gt; playerPrefClickObjs = new List&lt;string&gt; { 
+        "Feeding Minigame Clickable", "Laser Minigame Clickable", "Rhythm Minigame Clickable", 
+        "Mousetoy Minigame Clickable", "Vase Minigame Clickable", "Bellyrub Minigame Clickable",
+        "Litterbox", "TP", "Bathtub"};
+
+
+    private void Awake()
+    {
+        gc = this;
+    }
+
+    private void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            SceneManager.LoadScene("EndScene");
+        }
+
+    }
+
+    public static void FinishTask()
+    {
+        //Set cursor back to normal
+        Cursor.SetCursor(null, Vector2.zero, CursorMode.Auto);
+
+        tasksDone++;
+    }
+
+    public void ResetMiniGames()
+    {
+        foreach(string t in playerPrefClickObjs)
+        {
+            PlayerPrefs.SetInt(t, 0);
+        }   
+    }
+
+    public IEnumerator Winner()
+    {
+        fadeInOutObj.gameObject.SetActive(true);
+        float alpha = 0;
+        Color obj = fadeInOutObj.GetComponent&lt;Image&gt;().color;
+        while (alpha &lt; 1)
+        {
+            fadeInOutObj.GetComponent&lt;Image&gt;().color = new Color(obj.r, obj.g, obj.g, alpha);
+            alpha += .1f;
+            yield return new WaitForSeconds(.1f);
+        }
+
+        fadeInOutObj.GetComponent&lt;Image&gt;().color = new Color(obj.r, obj.g, obj.g, 1);
+        textObj.gameObject.SetActive(true);
+        textObj.text = "You succesfully raised the cats happiness to full making the adopted!";
+        yield return new WaitForSeconds(3);
+        SceneManager.LoadScene("EndScene");
+    }
+
+    public IEnumerator CompleteMiniGame(string scoreName)
+    {
+        int Curday = day;
+        fadeInOutObj.gameObject.SetActive(true);
+        float alpha = 0;
+        Color obj = fadeInOutObj.GetComponent&lt;Image&gt;().color;
+        while (alpha &lt; 1)
+        {
+            fadeInOutObj.GetComponent&lt;Image&gt;().color = new Color(obj.r, obj.g, obj.g, alpha);
+            alpha += .1f;
+            yield return new WaitForSeconds(.1f);
+        }
+
+        UpdateTextVisibility(1);
+
+        fadeInOutObj.GetComponent&lt;Image&gt;().color = new Color(obj.r, obj.g, obj.g, 1);
+
+        for (int a = 0; a &lt; 10; a++)
+        {
+            scoreObjects[1].text = randomString(scoreName.Length);
+            yield return new WaitForSeconds(.1f);
+        }
+
+        scoreObjects[1].text = scoreName;
+        if (scoreName != "Fail")
+            SoundManager.Instance.PlaySound(winMiniGame, 100);
+        else
+            SoundManager.Instance.PlaySound(failedMiniGame, 100);
+
+        obj = fadeInOutObj.GetComponent&lt;Image&gt;().color;
+        yield return new WaitForSeconds(2);
+
+        ms.background.SetActive(true);
+        minigameObject.miniGameWindow.SetActive(false);
+        minigameObject.miniGame.SetActive(false);
+        minigameObject.clickable = false;
+        ms.miniGameActive = false;
+        minigameObject.mouseCursor.SetActive(true);
+        minigameObject.m.enabled = false;
+
+        //Advances to next Day
+        if (tasksDone == MAX_TASK_DAY)
+        {
+            day++;
+            ResetMiniGames();
+            tasksDone = 0;
+            if (day &gt;= 8)
+            {
+                UpdateTextVisibility(0);
+                textObj.gameObject.SetActive(true);
+                textObj.text = "You ran out of time";
+                yield return new WaitForSeconds(3);
+                SceneManager.LoadScene("EndScene");
+            }
+            else if (amountCats == 3)
+            {
+                //Should've changed this to instead invoke the IEnumerator at line 203 called Winner but ran out of time
+                UpdateTextVisibility(0);
+                textObj.gameObject.SetActive(true);
+                textObj.text = "You succesfully raised the cats happiness to full making the adopted!";
+                yield return new WaitForSeconds(3);
+                SceneManager.LoadScene("EndScene");
+            }
+
+            while (alpha &gt; 0)
+            {
+                alpha -= .1f;
+                UpdateTextVisibility(alpha);
+                yield return new WaitForSeconds(.1f);
+            }
+
+            textObj.gameObject.SetActive(true);
+            textObj.text = "Day " + day.ToString();
+            yield return new WaitForSeconds(2);
+            alpha = 1;
+        }
+        while (alpha &gt; 0)
+        {
+            alpha -= .1f;
+            if (scoreObjects[0].gameObject.activeSelf)
+            {
+                UpdateTextVisibility(alpha);
+            }
+            fadeInOutObj.GetComponent&lt;Image&gt;().color = new Color(obj.r, obj.g, obj.g, alpha);
+            yield return new WaitForSeconds(.1f);
+        }
+
+        fadeInOutObj.gameObject.SetActive(false);
+
+        map.SetActive(true);
+        
+        if(Curday &lt; day)
+        {
+            SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+        }
+
+    }
+
+    private void UpdateTextVisibility(float alpha)
+    {
+        foreach (TextMeshProUGUI txt in scoreObjects)
+        {
+            if (alpha &gt; 0)
+            {
+                txt.gameObject.SetActive(true);
+            }
+            else
+            {
+                txt.gameObject.SetActive(false);
+            }
+            txt.color = new Color(txt.color.r, txt.color.g, txt.color.b, alpha);
+        }
+    }
+
+    string randomString(int length)
+    {
+        string randomString = "";
+        for (int a = 0; a &lt; length; a++)
+        {
+            randomString += glyphs[Random.Range(0, glyphs.Length)].ToString();
+        }
+        return randomString;
+    }
+
+    public void LoadMiniGame(CatObjectBehaviour cat)
+    {
+        minigameObject.buttonPress(cat);
+    }
+
+    public void CatSelectionActivate()
+    {
+        catSelection.SetActive(true);
+
+        if(amountCats &gt;= 3)
+        {
+            StartCoroutine(Winner());
+        }
+
+        foreach (GameObject g in catButtons)
+        {
+            int happy = 0;
+            switch (g.GetComponent&lt;Image&gt;().sprite.name)
+            {
+                case ("eyepatch"):
+                    happy = PlayerPrefs.GetInt("Eyepatch");
+                    break;
+                case ("gumball"):
+                    happy = PlayerPrefs.GetInt("Gumball");
+                    break;
+                case ("monkie"):
+                    happy = PlayerPrefs.GetInt("Monkie");
+                    break;
+                default:
+                    Debug.LogError("Could not find cat of name: " + g.GetComponent&lt;Image&gt;().sprite.name);
+                    break;
+            }
+            if(happy &gt;= 100)
+            {
+                g.SetActive(false);
+            }
+            else
+            {
+                g.SetActive(true);
+            }
+        }    
+    }
+
+    public void CatSelectionDeactivate()
+    {
+        catSelection.SetActive(false);
+        foreach (GameObject g in catButtons)
+        {
+            if(g.activeInHierarchy)
+            {
+                g.SetActive(false);
+            }
+        }
+    }    
+}</code>
+                        </pre>
                     </li>
                 </div>
-                <div class="section-container">
-                    <li class="section-divided-equally-centered">
-                        <div class="image-container">
-                            <img src="../styles/images/monkie.png" alt="Full-size image">
-                        </div>
-                    </li>
-                    <li class="section-divided-equally">
-                        <h3>LOREM IPSUM</h3>
-                        <p>
-                            LOREM IPSUM
-                        </p>
+
+                <div class="section-container" alt = "Minigame Code">
+                    <li class="code_container">
+                        <h3>Abstract MiniGame Code</h3>
+                        <pre>
+<script src="../prism.js"></script>
+<code class = "language-csharp line-numbers">using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+public abstract class MiniGame : MonoBehaviour
+{
+    protected int score;
+    protected enum MiniGameRating { Fail, Great, Perfect };
+    protected MiniGameRating rating;
+
+    protected bool playedBefore;
+    public CatObjectBehaviour cat;
+
+    protected void IncreaseCatHappiness()
+    {
+        //call setHappy method
+        switch(rating)
+        {
+            case (MiniGameRating.Fail):
+                score = 5;
+                break;
+            case (MiniGameRating.Great):
+                score = 10;
+                break;
+            case (MiniGameRating.Perfect):
+                score = 15;
+                break;
+        }
+        cat.GetComponent&lt;CatObjectBehaviour&gt;().setHappy(score);
+    }
+
+
+    protected void EndState()
+    {
+        Camera.main.gameObject.transform.position = new Vector3(0, 0, 0);
+        IncreaseCatHappiness();
+        GameController.FinishTask();
+        GameController.gc.StartCoroutine(GameController.gc.CompleteMiniGame(rating.ToString()));
+    }
+
+    public abstract void EndScoring();
+}
+</code>
+                        </pre>
                     </li>
                 </div>
-                <div class="section-container">
-                    <li class="section-divided-equally-centered">
-                        <div class="image-container">
-                            <img src="../styles/images/eyepatch.png" alt="Full-size image">
-                        </div>
-                    </li>
-                    <li class="section-divided-equally">
-                        <h3>LOREM IPSUM</h3>
-                        <p>
-                            LOREM IPSUM
-                        </p>
+
+                <div class="section-container" alt = "Cat Code">
+                    <li class="code_container">
+                        <h3>Cat Objects Code</h3>
+                        <pre>
+<script src="../prism.js"></script>
+<code class = "language-csharp line-numbers">using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+public class CatObjectBehaviour : MonoBehaviour
+{
+    //happiness
+    public int happy;
+    //name of cat
+    public string catName;
+
+    public AudioClip meowSFX;
+    private bool canMow;
+
+    // Start is called before the first frame update
+    void Start()
+    {
+        //set happy to zero unless the value is something else
+        happy = PlayerPrefs.GetInt(catName, 0);
+
+        canMow = false;
+    }
+
+    // Update is called once per frame
+    void Update()
+    {
+        if (Input.GetMouseButtonDown(0) && canMow)
+        {
+            SoundManager.Instance.PlaySound(meowSFX, 100);
+        }
+    }
+
+    private void OnMouseOver()
+    {
+        canMow = true;
+    }
+
+    private void OnMouseExit()
+    {
+        canMow = false;
+    }
+
+    //geters and seters
+    public void setHappy(int increase)
+    {
+        happy += increase;
+        PlayerPrefs.SetInt(catName, happy);
+        CheckCatHappiness();
+    }
+
+    public void CheckCatHappiness()
+    {
+        if(happy &gt;= 100)
+        {
+            gameObject.SetActive(false);
+            GameController.amountCats++;
+        }
+    }
+
+    public int getHappy()
+    {
+        return happy;
+    }
+
+    //reset happiness
+    public void resetHappy()
+    {
+        happy = 0;
+        PlayerPrefs.SetInt(catName, happy);
+    }
+}</code>
+                        </pre>
                     </li>
                 </div>
-            </div>
+
+                <!--<div class="section-container">
+                    <div class="video-container">
+                        <video controls>
+                            <source src="/videos/Score Text.mp4" type="video/mp4">
+                            Your browser does not support the video tag.
+                        </video>
+                    </div>
+                </div>
+                -->
+            </div>    
         </div>
+
         <div class="download_link">
             <div class="section-divided-stack">
                 <div class="section-container">
@@ -191,8 +555,7 @@
     </section>
 
 
-    <script type="module"
-    src="https://ajax.googleapis.com/ajax/libs/model-viewer/4.0.0/model-viewer.min.js"></script>
+    <script type="module" src="https://ajax.googleapis.com/ajax/libs/model-viewer/4.0.0/model-viewer.min.js"></script>
     <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
     <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
 </body>

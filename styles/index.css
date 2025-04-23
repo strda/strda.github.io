@@ -150,6 +150,20 @@
 }
 
 .banner1 {
+    height: 100%;
+    display: table-cell;
+    /* max-width: fit-content; */
+    width: 100%;
+    background: url(images/UserProfileBackgroundV1.png) center center / cover;
+    top: 0;
+    right: 0;
+    z-index: -1;
+    min-width: none;
+    background-size: cover;
+    background-position: center center;
+    position: absolute;
+    transform: translate3d(0px, 100px, 0px);
+  /*
   height: 30vw;
   display: block;
   max-width: auto;
@@ -157,7 +171,7 @@
   top: 0;
   left: 0;
   z-index: -1;
-  min-width: none;
+  min-width: none;*/
 }
 
 .banner2 {
@@ -244,6 +258,8 @@ input[type="submit"]:hover {
 .main {
   --padding: 5vw;
   display: inline-block;
+  position: absolute;
+  transform: translate3d(0px, 100vh, 0px);
 }
 
 @media screen and (min-width: 340px) and (max-width: 500px) {

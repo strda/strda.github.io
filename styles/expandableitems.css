@@ -133,7 +133,7 @@
 {
     color:green;
     border-bottom: 5px solid;
-    border-color: rgba(0, 0, 0, 0) rgba(0, 0, 0, 0) rgb(255, 132, 132) rgba(0, 0, 0, 0);
+    border-color: rgba(0, 0, 0, 0) rgba(0, 0, 0, 0) purple rgba(0, 0, 0, 0);
 }
 
 }
@@ -239,7 +239,7 @@
         text-shadow: 0px 0px 0 purple;
         color:purple;
         border-bottom: 5px solid;
-        border-color: rgba(0, 0, 0, 0) rgba(0, 0, 0, 0) rgb(255, 132, 132) rgba(0, 0, 0, 0);
+        border-color: rgba(0, 0, 0, 0) rgba(0, 0, 0, 0) purple rgba(0, 0, 0, 0);
     }
     
     .internal-expandable__content
@@ -291,7 +291,7 @@
         text-shadow: 0px 0px 0 purple;
         color:purple;
         border-bottom: 5px solid;
-        border-color: rgba(0, 0, 0, 0) rgba(0, 0, 0, 0) rgb(255, 132, 132) rgba(0, 0, 0, 0);
+        border-color: rgba(0, 0, 0, 0) rgba(0, 0, 0, 0) purple rgba(0, 0, 0, 0);
     }
 }
 
@@ -311,7 +311,7 @@ align-items: center;
 padding: 10px 10px;
 background-color: rgb(23, 23, 23);
 border-bottom: 5px solid;
-border-color: rgba(0, 0, 0, 0) rgba(0, 0, 0, 0) rgb(255, 132, 132) rgba(0, 0, 0, 0);
+border-color: rgba(0, 0, 0, 0) rgba(0, 0, 0, 0) purple rgba(0, 0, 0, 0);
 }
 
 .portfolio_list-items a:hover{

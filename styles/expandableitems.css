@@ -194,6 +194,7 @@
         margin-right: 5%;
         padding: 2.5%;
         justify-content: space-between;
+        align-items: center;
     }
     
     .internal-expandable {
@@ -203,12 +204,16 @@
         max-width: 500px;
 
         padding: 0 10px;
-        font-size: 1.25em;
+        /*font-size: 1.25em;*/
         font-family: 'Inter',sans-serif;
         transition-property: border;
         transition-duration: .3s;
+        transform: translate3d(0px, 3px, 0px);
     }
 
+    .internal-expandable--open{
+        transform: translate3d(0px, 166.75px, 0px);
+    }
     
     
     .internal-expandable--open .internal-expandable__content-wrapper{
@@ -260,7 +265,7 @@
         display: grid;
         
         grid-template-rows: 0fr;
-        transition: grid-template-rows 0.3s ease-in;
+        /*transition: grid-template-rows 0.3s ease-in;*/
     }
 
     

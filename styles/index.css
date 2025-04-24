@@ -3,8 +3,12 @@
   * {
     margin: 0;
     box-sizing: border-box;
-    font-size: 20px;
+    font-size: 1em;
     color: white;
+  }
+
+  .main h1 {
+    font-size: 3.5em;
   }
 
   .navspacer {
@@ -76,6 +80,40 @@
   .special_icons {
     display: flex;
   }
+  .formatedtxt {
+    font-size: 2em;
+  }
+
+  .logo-container {
+    max-width: 10vw;
+    max-height: 10vh;
+  }
+  .logo-container img {
+    width: 10vw;
+    max-width: 10vh; /* Prevents them from getting too large */
+  }
+/* #region name */
+.main {
+  --padding: 5vw;
+  display: inline-block;
+  position: absolute;
+  transform: translate3d(0px, 100vh, 0px);
+}
+.banner1 {
+  height: 100%;
+  display: table-cell;
+  /* max-width: fit-content; */
+  width: 100%;
+  background: url(images/UserProfileBackgroundV1.png) center center / cover;
+  top: 0;
+  right: 0;
+  z-index: -1;
+  min-width: none;
+  background-size: cover;
+  background-position: center center;
+  position: absolute;
+  transform: translate3d(0px, 10vh, 0px);
+}
 }
 
 /*When screensize is mobile*/
@@ -84,10 +122,13 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    font-size: 20;
+    font-size: 1em;
     color: white;
   }
-  /* #region name */
+  
+  .main h1 {
+    font-size: 2.5em;
+  }
 
   html {
     scroll-behavior: smooth;
@@ -147,9 +188,27 @@
   .special_icons {
     display: flex;
   }
-}
+  .formatedtxt {
+    font-size: 1.25em;
+  }
 
-.banner1 {
+  
+  .logo-container {
+    max-width: 15vw;
+    max-height: 15vh;
+  }
+  .logo-container img {
+    width: 15vw;
+    max-width: 15vh; /* Prevents them from getting too large */
+  }
+
+  .main {
+    --padding: 5vw;
+    display: inline-block;
+    position: absolute;
+    transform: translate3d(0px, 100vh, 0px);
+  }
+  .banner1 {
     height: 100%;
     display: table-cell;
     /* max-width: fit-content; */
@@ -162,17 +221,30 @@
     background-size: cover;
     background-position: center center;
     position: absolute;
-    transform: translate3d(0px, 100px, 0px);
-  /*
-  height: 30vw;
-  display: block;
-  max-width: auto;
-  background: url("images/UserProfileBackgroundV1.png") center center/cover;
-  top: 0;
-  left: 0;
-  z-index: -1;
-  min-width: none;*/
+    transform: translate3d(0px, 10vh, 0px);
+  }
+
 }
+
+.logo-container {
+  width: 100%;
+  height: 100%;
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  object-fit: cover;
+  flex-wrap: wrap; /* Allows images to wrap on smaller screens */
+  /*border: 3px solid red;*/
+}
+.logo-container img {
+  padding: .5vw;
+  height: auto;
+  object-fit: cover;
+  /*border: 5px solid blue;*/
+}
+
 
 .banner2 {
   height: 30vw;
@@ -355,22 +427,17 @@ justify-self: center;
   width: 100%;
   height: 100%;
 }
-.main h1,
-h1 {
+.main h1 {
   /*background-color: red;*/
+  text-decoration: underline;
+  padding-bottom: 0.5%;
   color: purple;
   display: flex;
   flex-wrap: wrap;
   align-items: center;
   justify-content: center;
-  font-size: 2.5em;
   text-shadow: -1px -1px 0 rgb(42, 0, 42), 1px -1px 0 rgb(42, 0, 42),
     -1px 1px 0 rgb(42, 0, 42), 1px 1px 0 rgb(42, 0, 42);
-}
-
-.main h1 {
-  text-decoration: underline;
-  padding-bottom: 0.5%;
 }
 
 .grid-element {
@@ -382,6 +449,8 @@ h1 {
   padding: 5px;
 }
 
+.grid-element default,
+.grid-element a,
 .grid-element p {
   width: auto;
   height: auto;
@@ -395,6 +464,9 @@ h1 {
   color: rgb(169, 169, 169);
   /*border: 2px solid gold;*/
 }
+
+.grid-element default {color: yellow;}
+.grid-element a{color: gold; display: inline;}
 
 .grid-element h4 {
   color: rgb(236, 236, 236);
@@ -493,27 +565,7 @@ h1 {
   /*border: 5px solid blue;*/
 }
 
-.logo-container {
-  width: 100%;
-  height: 100%;
-  max-width: 50px;
-  max-height: 50px;
-  position: relative;
-  overflow: hidden;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  object-fit: cover;
-  flex-wrap: wrap; /* Allows images to wrap on smaller screens */
-  /*border: 3px solid red;*/
-}
-.logo-container img {
-  width: 50px;
-  height: auto;
-  max-width: 50px; /* Prevents them from getting too large */
-  object-fit: cover;
-  /*border: 5px solid blue;*/
-}
+
 
 .slist {
   display: flex;
@@ -551,18 +603,18 @@ h1 {
 }
 
 .clickable-button {
+  --color : rgb(143, 0, 143);
   -moz-user-select: none;
   -webkit-user-select: none;
   user-select: none;
   box-sizing: border-box;
   display: inline-block;
-  background: rgb(143, 0, 143);
+  background: var(--color);
   color: white;
   text-decoration: none;
   padding: 0 10px;
-  font-size: 20px;
   text-shadow: 0 2px 0 rgb(42, 0, 42);
-  background: var(--itchio_button_color, rgb(143, 0, 143));
+  background: var(--itchio_button_color, var(--color));
   color: var(--itchio_button_fg_color, white);
   text-shadow: 0 2px 0 var(--itchio_button_shadow_color, rgb(42, 0, 42));
   cursor: pointer;
@@ -575,6 +627,8 @@ h1 {
   font-weight: bold;
   height: 55px;
 }
+
+
 
 .formatedtxt {
   padding: 0% 10% 1% 10%;

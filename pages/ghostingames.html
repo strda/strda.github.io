@@ -8,6 +8,7 @@
     <link rel="stylesheet" type="text/css" href="../styles/index.css" />
     <link rel="stylesheet" type="text/css" href="../styles/expandableitems.css" />
     <link rel="stylesheet" type="text/css" href="../styles/otherpages.css" />
+    <link href="../styles/prism.css" rel="stylesheet" />
     <script src="../app.js" defer></script>
 </head>
 
@@ -30,8 +31,9 @@
                         </div>
                         <div class="internal-expandable__content-wrapper">
                             <div class="internal-expandable__content">
-                                <li class="portfolio_list-items"><a href="sss.html">Soul Sync City</a></li>
-                                <li class="portfolio_list-items"><a href="attachmentissues.html">Attachment Issues</a>
+                                <li class="portfolio_list-items"><a href="/pages/sss.html">Soul Sync City</a></li>
+                                <li class="portfolio_list-items"><a href="/pages/attachmentissues.html">Attachment
+                                        Issues</a>
                                 </li>
                                 <li class="portfolio_list-items"><a href="partycrashers.html">Party Crashers</a>
                                 </li>
@@ -45,12 +47,12 @@
             </div>
         </div>
     </nav>
-    <div class="navspacer"></div>
+    <!--<div class="navspacer"></div>-->
     <section class="otherpages">
-        <div class = "wip">
+       <!-- <div class = "wip">
             <h1>WARNING THIS PAGE IS STIL WIP</h1>
         </div>
-
+-->
         <div class="section_title">
             <h1>Ghost'n Games</h1>
             <div class="section-container">
@@ -97,6 +99,8 @@
                         <li>Coded and implemented the GTAV minigame</li>
                         <h4>Debugger</h4>
                         <li>Helped other teammate when issues arose</li>
+                        <h4>Other</h4>
+                        <li>Coded and implemented the GameController/PlayerController</li> 
                     </div>
                 </div>
             </div>
@@ -104,28 +108,416 @@
         <div class="worked_on_details">
             <div class="section-divided-stack">
                 <div class="section-container">
-                    <h2>LOREM IPSUM</h2>
+                    <h2>Code:</h2>
                 </div>
+                
+
                 <div class="section-container">
-                    <li class="section-divided-equally-centered">
-                        <div class="image-container">
-                            <img src="../styles/images/download.png" alt="Full-size image">
-                        </div>
-                    </li>
-                    <li class="section-divided-equally">
-                        <h3>LOREM IPSUM</h3>
-                        <p>LOREM IPSUM</p>
+                    <li class="code_container">
+                        <h3>PacMan MiniGame</h3> 
+                        <pre>
+                            <script src="../prism.js"></script>
+<code class = "language-csharp line-numbers">using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+public class PacManManager : MonoBehaviour
+{
+    public int AiAlive = 4;
+    public static PacManManager instance { get; private set; }
+
+    public List&lt;AI&gt; Enemies;
+    [SerializeField] private float delayedStartTimer;
+    private bool enemiesStart;
+    public bool gameStart;
+    public GameObject winScreen;
+    private bool queued;
+    public GameObject cherryCollectable;
+    public GameObject bar;
+
+    public bool jumpscare;
+
+
+    private void Awake()
+    {
+        instance = this;
+    }
+
+    private void Start()
+    {
+        PlayerBehaviour.instance.enabled = false;
+    }
+
+    private void Update()
+    {
+        if (gameStart)
+        {
+            if (Enemies.Count == 0 && !queued)
+            {
+                winScreen.SetActive(true);
+                SceneLoader.instance.NextScene(5);
+                PlayerPrefs.SetInt("MiniGamesWon", PlayerPrefs.GetInt("MiniGamesWon", 0) + 1);
+                queued = true;
+            }
+
+            if (delayedStartTimer &gt; 0)
+            {
+                delayedStartTimer -= Time.deltaTime;
+            }
+            else if (!enemiesStart)
+            {
+                enemiesStart = true;
+                bar.SetActive(false);
+                StartCoroutine("BarRise");
+                for (int i = 0; i &lt; Enemies.Count; i++)
+                {
+                    Enemies[i].movement = AI.movementState.chasing;
+                }
+            }
+        }
+    }
+
+    IEnumerator BarRise()
+    {
+        yield return new WaitForSeconds(5f);
+        bar.SetActive(true);
+    }
+
+    public void StartGame()
+    {
+        gameStart = true;
+        PlayerBehaviour.instance.enabled = true;
+        StartCoroutine(spawnCherry());
+    }
+
+    public void DisableAI()
+    {
+        for(int i =0; i &lt; Enemies.Count;i++)
+        {
+            Enemies[i].agent.enabled = false;
+        }
+    }
+
+    IEnumerator spawnCherry()
+    {
+        yield return new WaitForSeconds(10f);
+        Instantiate(cherryCollectable, new Vector3(0f, 3.2f, 0f), Quaternion.identity);
+    }
+}
+
+-------------------------------------------------------------------------------------------------
+=================================================================================================
+                                        //AI CODE BELOW//
+                                    //VERY BASIC DUE TO TIME//
+=================================================================================================
+-------------------------------------------------------------------------------------------------
+
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+using UnityEngine.AI;
+
+public class AI : MonoBehaviour
+{
+    public NavMeshAgent agent;
+    public Transform target;
+    [SerializeField] private Sprite deathSprite;
+    [SerializeField] private SpriteRenderer sr;
+    [SerializeField] private Animator anim;
+    private bool ded;
+    [SerializeField] private PlayerBehaviour player;
+    [SerializeField] private Rigidbody2D rb;
+    [SerializeField] private Collider2D circle;
+    [SerializeField] private AudioSource audio;
+    [SerializeField] private AudioClip clip;
+
+    public enum movementState
+    {
+        idle,
+        chasing,
+        scared
+    }
+
+    public movementState movement = movementState.idle;
+
+    private void Awake()
+    {
+        agent.updateRotation = false;
+        agent.updateUpAxis = false;
+        StartCoroutine(PathFinding());
+    }
+
+    private void Update()
+    {
+        if (!ded && movement != movementState.idle)
+        {
+            if (player.powerup || player.immune)
+            {
+                anim.SetBool("scared", true);
+                movement = movementState.scared;
+            }
+            else if (!player.powerup)
+            {
+                anim.SetBool("scared", false);
+                movement = movementState.chasing;
+            }
+        }
+    }
+
+    IEnumerator PathFinding()
+    {
+        while (true)
+        {
+            if(ded)
+                yield break;
+            if (!ded && movement != movementState.idle && agent.enabled)
+            {
+                if (movement == movementState.chasing)
+                {
+                    agent.SetDestination(target.position);
+                }
+                else if (movement == movementState.scared)
+                {
+                    agent.SetDestination(transform.position - player.gameObject.transform.position);
+                }
+                yield return null;
+            }
+            yield return new WaitForEndOfFrame();
+        }
+    }
+
+    IEnumerator deadSequence()
+    {
+        yield return new WaitForEndOfFrame();
+        agent.enabled = false;
+        yield return new WaitForEndOfFrame();
+        audio.Play();
+        rb.constraints = RigidbodyConstraints2D.None;
+        circle.enabled = false;
+        rb.AddForce(Vector3.up * 400);
+        Destroy(gameObject, 4);
+        PacManManager.instance.Enemies.Remove(this);
+        yield return null;
+    }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.gameObject.CompareTag("Player"))
+        {
+            if (PlayerBehaviour.instance.powerup)
+            {
+                sr.sprite = deathSprite;
+                ded = true;
+                StartCoroutine(deadSequence());
+            }
+            else
+            {
+                if (!PacManManager.instance.jumpscare)
+                {
+                    PacManManager.instance.jumpscare = true;
+                    StartCoroutine(JumpScare());
+                    PlayerBehaviour.instance.inputEnabled = false;
+                    PlayerBehaviour.instance.AddLivesToSelf(-1);
+                }
+            }
+        }
+    }
+
+    IEnumerator JumpScare()
+    {
+        audio.clip = clip;
+        sr.sortingOrder = 10;
+        agent.enabled = false;
+        transform.position = new Vector3(0,-2,0);
+        float time = 0;
+        audio.Play();
+        while (time &lt; 1)
+        {
+            transform.localScale = Vector3.Lerp(transform.localScale, new Vector3(18, 18, 18), .5f);
+            time += Time.deltaTime;
+            yield return new WaitForSeconds(.05f);
+        }
+        yield return null;
+
+        yield return new WaitForSeconds(5);
+        SceneLoader.instance.ReturnToMainMenu();
+    }
+}    
+</code>
+                        </pre>
                     </li>
                 </div>
+
                 <div class="section-container">
-                    <li class="section-divided-equally-centered">
-                        <div class="image-container">
-                            <img src="../styles/images/download.png" alt="Full-size image">
-                        </div>
-                    </li>
-                    <li class="section-divided-equally">
-                        <h3>LOREM IPSUM</h3>
-                        <p>LOREM IPSUM</p>
+                    <li class="code_container">
+                        <h3>Player Behaviour</h3> 
+                        <pre>
+                            <script src="../prism.js"></script>
+<code class = "language-csharp line-numbers">
+    using System.Collections;
+    using System.Collections.Generic;
+    using TMPro;
+    using UnityEngine;
+    using UnityEngine.UI;
+    
+    public class PlayerBehaviour : MonoBehaviour
+    {
+        public float speed;
+        public int score = 0;
+        public TMP_Text scoreTxt;
+        [SerializeField] private int playerLives = 3;
+    
+        public bool inputEnabled = true;
+    
+        public bool immune;
+        [SerializeField] private int immunityTime;
+        private float immunityTimer;
+    
+        public bool powerup;
+        [SerializeField] private float powerUpTotalTime;
+        private float powerupTimer;
+        public Sprite liveLost;
+        public Sprite liveGain;
+        public List&lt;GameObject&gt; livesImgs;
+        private int nextLiveInd = 2;
+    
+        public static PlayerBehaviour instance { get; private set; }
+    
+        private Animator anim;
+    
+        private void Awake()
+        {
+            instance = this;
+            playerLives = PlayerPrefs.GetInt("PlayerLives", playerLives);
+            score = PlayerPrefs.GetInt("Score", 0);
+            scoreTxt.text = ": " + score;
+            for(int i =0; i &lt; livesImgs.Count; i++)
+            {
+                if(i &gt;= playerLives)
+                {
+                    livesImgs[i].GetComponent&lt;Image&gt;().sprite = liveLost;
+                }
+            }
+            anim = gameObject.GetComponent&lt;Animator&gt;();
+        }
+    
+        public void SetPlayerLives(int value)
+        {
+            if (immunityTimer &lt;= 0)
+            {
+                if (value &lt; playerLives)
+                {
+                    immunityTimer = immunityTime;
+                }
+                playerLives = value; 
+                PlayerPrefs.SetInt("PlayerLives", playerLives);
+            }
+            else
+            {
+                Debug.Log("Player Immune");
+            }
+        }
+    
+        public void AddLivesToSelf(int value)
+        {
+            if (immunityTimer &lt;= 0)
+            {
+                if (playerLives + value &lt; playerLives)
+                {
+                    immune = true;
+                    immunityTimer = immunityTime;
+                }
+                playerLives += value;
+                if (value &gt; 0)
+                {
+                    livesImgs[nextLiveInd].GetComponent&lt;Image&gt;().sprite = liveGain;
+                    nextLiveInd++;
+                }
+                else
+                {
+                    livesImgs[nextLiveInd].GetComponent&lt;Image&gt;().sprite = liveLost;
+                    nextLiveInd--;
+                    if (playerLives &lt;= 0)
+                        SceneLoader.instance.GameOverScene();
+                    else
+                        SceneLoader.instance.NextScene(3);
+                }
+    
+                //lives.text = "Lives: " + playerLives.ToString();
+                PlayerPrefs.SetInt("PlayerLives", playerLives);
+            }
+            else
+            {
+                Debug.Log("Player Immune");
+            }
+        }
+    
+        public void AddScoreToSelf(int value)
+        {
+            score += value;
+            scoreTxt.text = ": " + score.ToString();
+            PlayerPrefs.SetInt("Score", score);
+        }
+    
+        public int GetPlayerLives()
+        { return playerLives; }    
+    
+        public void PowerUp()
+        {
+            Debug.Log("POWERUP");
+            powerupTimer = powerUpTotalTime;
+            powerup = true;
+            anim.SetBool("Cross", true);
+        }
+    
+        void Update()
+        {
+            if(immunityTimer &gt; 0)
+            {
+                immunityTimer -= Time.deltaTime;
+            }
+            else if(immunityTimer &lt;= 0 && immune)
+            {
+                immune = false;
+            }
+    
+            if(powerupTimer &gt; 0)
+            {
+                powerupTimer -= Time.deltaTime;
+            }
+            else if(powerupTimer &lt;= 0 && powerup)
+            {
+                powerup = false;
+                anim.SetBool("Cross", false);
+            }
+    
+            if (inputEnabled)
+            {
+                if (Input.GetKey(KeyCode.LeftArrow) || Input.GetKey(KeyCode.A))
+                {
+                    transform.Translate(Vector2.left * speed * Time.deltaTime);
+                    anim.SetInteger("Direction", 0);
+                }
+                if (Input.GetKey(KeyCode.RightArrow) || Input.GetKey(KeyCode.D))
+                {
+                    transform.Translate(Vector2.right * speed * Time.deltaTime);
+                    anim.SetInteger("Direction", 2);
+                }
+                if (Input.GetKey(KeyCode.UpArrow) || Input.GetKey(KeyCode.W))
+                {
+                    transform.Translate(Vector2.up * speed * Time.deltaTime);
+                    anim.SetInteger("Direction", 1);
+                }
+                if (Input.GetKey(KeyCode.DownArrow) || Input.GetKey(KeyCode.S))
+                {
+                    transform.Translate(Vector2.down * speed * Time.deltaTime);
+                    anim.SetInteger("Direction", 3);
+                }
+            }
+        }
+    }    
+</code>
+                        </pre>
                     </li>
                 </div>
             </div>

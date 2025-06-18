@@ -1,14 +1,14 @@
 <!DOCTYPE html>
-<html>
+<html lang="en-us">
 
 <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>h</title>
-    <link rel="stylesheet" type="text/css" href="../styles/index.css" />
-    <link rel="stylesheet" type="text/css" href="../styles/expandableitems.css" />
-    <link rel="stylesheet" type="text/css" href="../styles/otherpages.css" />
-    <link href="../styles/prism.css" rel="stylesheet" />
+    <link rel="stylesheet" type="text/css" href="../styles/index.css">
+    <link rel="stylesheet" type="text/css" href="../styles/expandableitems.css">
+    <link rel="stylesheet" type="text/css" href="../styles/otherpages.css">
+    <link href="../styles/prism.css" rel="stylesheet">
     <script src="../app.js" defer></script>
 </head>
 
@@ -22,27 +22,27 @@
             <div class="expandable__content-wrapper">
                 <ul class="expandable__content">
                     <li class="list-items"><a href="../index.html">Home</a></li>
-                    <li class="list-items"><a href="aboutresume.html">About [&] Resume</a></li>
+                    <li class="list-items"><a href="aboutresume.html">About [&amp;] Resume</a></li>
                     <li class="list-items"><a href="contact.html">Contact</a></li>
-                    <div class="internal-expandable">
+                    <li class="internal-expandable">
                         <div class="internal-expandable__title-bar">
                             <span class="internal-expandable__title">Portfolio</span>
                             <ion-icon class="internal-expandable__icon" name="chevron-back"></ion-icon>
                         </div>
                         <div class="internal-expandable__content-wrapper">
                             <div class="internal-expandable__content">
-                                <li class="portfolio_list-items"><a href="/pages/sss.html">Soul Sync City</a></li>
-                                <li class="portfolio_list-items"><a href="/pages/attachmentissues.html">Attachment
+                                <div class="portfolio_list-items"><a href="/pages/sss.html">Soul Sync City</a></div>
+                                <div class="portfolio_list-items"><a href="/pages/attachmentissues.html">Attachment
                                         Issues</a>
-                                </li>
-                                <li class="portfolio_list-items"><a href="partycrashers.html">Party Crashers</a>
-                                </li>
-                                <li class="portfolio_list-items"><a href="otherprojects.html">Other Projects</a>
-                                </li>
-                                <li class="portfolio_list-items"><a href="art.html">Art Showcase</a></li>
+                                </div>
+                                <div class="portfolio_list-items"><a href="partycrashers.html">Party Crashers</a>
+                                </div>
+                                <div class="portfolio_list-items"><a href="otherprojects.html">Other Projects</a>
+                                </div>
+                                <div class="portfolio_list-items"><a href="art.html">Art Showcase</a></div>
                             </div>
                         </div>
-                    </div>
+                    </li>
                 </ul>
             </div>
         </div>
@@ -58,7 +58,7 @@
             <div class="section-container">
                 <div class="section-h-left">
                     <div class="image-container">
-                        <img src="../styles/images/Ghost_In_Games.gif">
+                        <img src="../styles/images/Ghost_In_Games.gif" alt="fightforlife gif">
                     </div>
                 </div>
                 <div class="section-h-right">
@@ -93,15 +93,15 @@
                     <h2>Responsibilities:</h2>
                 </div>
                 <div class="section-container">
-                    <div class="textlist_bulletpoint">
+                    <ul class="textlist_bulletpoint">
                         <h4>Minigames</h4>
                         <li>Coded and implemented the pacman minigame</li>
                         <li>Coded and implemented the GTAV minigame</li>
                         <h4>Debugger</h4>
                         <li>Helped other teammate when issues arose</li>
                         <h4>Other</h4>
-                        <li>Coded and implemented the GameController/PlayerController</li> 
-                    </div>
+                        <li>Coded and implemented the GameController/PlayerController</li>
+                    </ul>
                 </div>
             </div>
         </div>
@@ -110,14 +110,12 @@
                 <div class="section-container">
                     <h2>Code:</h2>
                 </div>
-                
-
                 <div class="section-container">
-                    <li class="code_container">
-                        <h3>PacMan MiniGame</h3> 
+                    <div class="code_container">
+                        <h3>PacMan MiniGame</h3>
                         <pre>
                             <script src="../prism.js"></script>
-<code class = "language-csharp line-numbers">using System.Collections;
+<code class="language-csharp line-numbers">using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -152,7 +150,7 @@ public class PacManManager : MonoBehaviour
     {
         if (gameStart)
         {
-            if (Enemies.Count == 0 && !queued)
+            if (Enemies.Count == 0 &amp;&amp; !queued)
             {
                 winScreen.SetActive(true);
                 SceneLoader.instance.NextScene(5);
@@ -249,7 +247,7 @@ public class AI : MonoBehaviour
 
     private void Update()
     {
-        if (!ded && movement != movementState.idle)
+        if (!ded &amp;&amp; movement != movementState.idle)
         {
             if (player.powerup || player.immune)
             {
@@ -270,7 +268,7 @@ public class AI : MonoBehaviour
         {
             if(ded)
                 yield break;
-            if (!ded && movement != movementState.idle && agent.enabled)
+            if (!ded &amp;&amp; movement != movementState.idle &amp;&amp; agent.enabled)
             {
                 if (movement == movementState.chasing)
                 {
@@ -342,37 +340,37 @@ public class AI : MonoBehaviour
         yield return new WaitForSeconds(5);
         SceneLoader.instance.ReturnToMainMenu();
     }
-}    
+}
 </code>
                         </pre>
-                    </li>
+                    </div>
                 </div>
 
                 <div class="section-container">
-                    <li class="code_container">
-                        <h3>Player Behaviour</h3> 
+                    <div class="code_container">
+                        <h3>Player Behaviour</h3>
                         <pre>
                             <script src="../prism.js"></script>
-<code class = "language-csharp line-numbers">
+<code class="language-csharp line-numbers">
     using System.Collections;
     using System.Collections.Generic;
     using TMPro;
     using UnityEngine;
     using UnityEngine.UI;
-    
+
     public class PlayerBehaviour : MonoBehaviour
     {
         public float speed;
         public int score = 0;
         public TMP_Text scoreTxt;
         [SerializeField] private int playerLives = 3;
-    
+
         public bool inputEnabled = true;
-    
+
         public bool immune;
         [SerializeField] private int immunityTime;
         private float immunityTimer;
-    
+
         public bool powerup;
         [SerializeField] private float powerUpTotalTime;
         private float powerupTimer;
@@ -380,11 +378,11 @@ public class AI : MonoBehaviour
         public Sprite liveGain;
         public List&lt;GameObject&gt; livesImgs;
         private int nextLiveInd = 2;
-    
+
         public static PlayerBehaviour instance { get; private set; }
-    
+
         private Animator anim;
-    
+
         private void Awake()
         {
             instance = this;
@@ -400,7 +398,7 @@ public class AI : MonoBehaviour
             }
             anim = gameObject.GetComponent&lt;Animator&gt;();
         }
-    
+
         public void SetPlayerLives(int value)
         {
             if (immunityTimer &lt;= 0)
@@ -409,7 +407,7 @@ public class AI : MonoBehaviour
                 {
                     immunityTimer = immunityTime;
                 }
-                playerLives = value; 
+                playerLives = value;
                 PlayerPrefs.SetInt("PlayerLives", playerLives);
             }
             else
@@ -417,7 +415,7 @@ public class AI : MonoBehaviour
                 Debug.Log("Player Immune");
             }
         }
-    
+
         public void AddLivesToSelf(int value)
         {
             if (immunityTimer &lt;= 0)
@@ -442,7 +440,7 @@ public class AI : MonoBehaviour
                     else
                         SceneLoader.instance.NextScene(3);
                 }
-    
+
                 //lives.text = "Lives: " + playerLives.ToString();
                 PlayerPrefs.SetInt("PlayerLives", playerLives);
             }
@@ -451,17 +449,17 @@ public class AI : MonoBehaviour
                 Debug.Log("Player Immune");
             }
         }
-    
+
         public void AddScoreToSelf(int value)
         {
             score += value;
             scoreTxt.text = ": " + score.ToString();
             PlayerPrefs.SetInt("Score", score);
         }
-    
+
         public int GetPlayerLives()
-        { return playerLives; }    
-    
+        { return playerLives; }
+
         public void PowerUp()
         {
             Debug.Log("POWERUP");
@@ -469,28 +467,28 @@ public class AI : MonoBehaviour
             powerup = true;
             anim.SetBool("Cross", true);
         }
-    
+
         void Update()
         {
             if(immunityTimer &gt; 0)
             {
                 immunityTimer -= Time.deltaTime;
             }
-            else if(immunityTimer &lt;= 0 && immune)
+            else if(immunityTimer &lt;= 0 &amp;&amp; immune)
             {
                 immune = false;
             }
-    
+
             if(powerupTimer &gt; 0)
             {
                 powerupTimer -= Time.deltaTime;
             }
-            else if(powerupTimer &lt;= 0 && powerup)
+            else if(powerupTimer &lt;= 0 &amp;&amp; powerup)
             {
                 powerup = false;
                 anim.SetBool("Cross", false);
             }
-    
+
             if (inputEnabled)
             {
                 if (Input.GetKey(KeyCode.LeftArrow) || Input.GetKey(KeyCode.A))
@@ -515,17 +513,17 @@ public class AI : MonoBehaviour
                 }
             }
         }
-    }    
+    }
 </code>
                         </pre>
-                    </li>
+                    </div>
                 </div>
             </div>
         </div>
         <div class="download_link">
             <div class="section-divided-stack">
                 <div class="section-container">
-                    <div class ="clickable-button">            
+                    <div class="clickable-button">
                         <a href="https://thomasrevord.itch.io/ghosts-n-games">Download on itch.io</a>
                     </div>
                 </div>

@@ -47,7 +47,6 @@
             </div>
         </div>
     </nav>
-
     <section class="otherpages">
         <div class="section_title">
             <h1>Unity Save System</h1>
@@ -83,7 +82,10 @@
                         <h3>Save Manager</h3>
                         <pre>
                             <script src="../prism.js"></script>
-<code class="language-csharp line-numbers">/// &lt;summary&gt;
+                            <div class="code-button-container" id="buttonContainer3">
+                                <button onclick="myFunction(button3, buttonContainer3, hide3)" type="button" id="button3" class="defaultButton">DisplayCode</button>
+                            </div>
+<code class="language-csharp line-numbers" id="hide3" style="display: none;">/// &lt;summary&gt;
 /// Author: Jason Shull
 /// Description: This is the script used to handle the retrival of data from all active objects in the scene
 /// before closing and loading previously saved data into these objects
@@ -243,10 +245,13 @@ public class DataPersistanceManager : MonoBehaviour
 
                 <div class="section-container">
                     <div class="code_container">
-                        <h3>Data Encryption and how data is saved</h3>
+                        <h3>How Data Is Saved</h3>
                         <pre>
                             <script src="../prism.js"></script>
-<code class="language-csharp line-numbers">/// &lt;summary&gt;
+                            <div class="code-button-container" id="buttonContainer2">
+                                <button onclick="myFunction(button2, buttonContainer2, hide2)" type="button" id="button2" class="defaultButton">DisplayCode</button>
+                            </div>
+<code class="language-csharp line-numbers" id="hide2" style="display: none;">/// &lt;summary&gt;
 /// Author: Jason Shull
 /// Description: This is a file that saves and encrypts the data that wants
 /// to be saved and saves it as a json new file
@@ -670,11 +675,13 @@ public class FileDataHandler
 
                 <div class="section-container">
                     <div class="code_container">
-                        <h3>Encryption And Decryption of data</h3>
+                        <h3>Encryption And Decryption Of Data</h3>
                         <pre>
                             <script src="../prism.js"></script>
-<code class="language-csharp line-numbers">
-#region AES
+                            <div class="code-button-container" id="buttonContainer">
+                                <button onclick="myFunction(button, buttonContainer, hide)" type="button" id="button" class="defaultButton">DisplayCode</button>
+                            </div>
+<code class="language-csharp line-numbers" id="hide" style="display: none;">#region AES
 
 #region Key Generation
 public async Task GenerateKey()
@@ -1689,6 +1696,7 @@ public string ConvertToHex(string plainText)
                         </pre>
                     </div>
                 </div>
+
             </div>
         </div>
         <div class="download_link">
@@ -1701,6 +1709,22 @@ public string ConvertToHex(string plainText)
             </div>
         </div>
     </section>
+
+    <script>
+        function myFunction(button, buttonContainer, hidden) {
+        buttonContainer.classList.toggle('open');
+        button.classList.toggle('smallButton');
+
+        if (hidden.style.display === "none" ) {
+            hidden.style.display = "block";
+            button.innerHTML="HideCode";
+        } else {
+            hidden.style.display = "none";
+            button.innerHTML="Display Code";
+        }
+}
+    </script>
+
     <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
     <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
 </body>

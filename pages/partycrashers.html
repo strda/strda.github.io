@@ -167,7 +167,10 @@
                         <h3>Animation Sync Code</h3>
                         <pre>
                             <script src="../prism.js"></script>
-<code class="language-csharp line-numbers">using System.Collections;
+                            <div class="code-button-container" id="buttonContainer">
+                                <button onclick="myFunction(button, buttonContainer, hide)" type="button" id="button" class="defaultButton">DisplayCode</button>
+                            </div>
+<code class="language-csharp line-numbers" id="hide" style="display: none;">using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 public class BirdBehaviour : MonoBehaviour
@@ -307,7 +310,10 @@ public class BirdBehaviour : MonoBehaviour
                         <h3>Flash Behaviour Code</h3>
                         <pre>
                             <script src="../prism.js"></script>
-<code class="language-csharp line-numbers">using System.Collections;
+                            <div class="code-button-container" id="buttonContainer2">
+                                <button onclick="myFunction(button2, buttonContainer2, hide2)" type="button" id="button2" class="defaultButton">DisplayCode</button>
+                            </div>
+<code class="language-csharp line-numbers" id="hide2" style="display: none;">using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -393,7 +399,20 @@ using UnityEngine;
         </div>
     </section>
 
+        <script>
+        function myFunction(button, buttonContainer, hidden) {
+        buttonContainer.classList.toggle('open');
+        button.classList.toggle('smallButton');
 
+        if (hidden.style.display === "none" ) {
+            hidden.style.display = "block";
+            button.innerHTML="HideCode";
+        } else {
+            hidden.style.display = "none";
+            button.innerHTML="Display Code";
+        }
+}
+    </script>
 
     <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
     <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
